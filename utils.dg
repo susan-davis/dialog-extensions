@@ -1,0 +1,218 @@
+%% utils.dg
+%% Useful utility routines for Stellar Union games.
+
+%%-------------------------------- INTERFACES --------------------------------
+
+(interface ($<Number is odd))  %% yagni?
+
+(interface ($<Number is even)) %% yagni?
+
+(interface (max $<X and $<Y into $>Max))
+
+(interface (min $<X and $<Y into $>Min))
+
+(interface ($<Num1 delta $<Num2 into $>Result))
+
+(interface (add $<X to $<Y into $>Z))           %% safe, capped at maxint
+
+(interface (add $<X to $<Y into $>Z max $<Max)) %% safe, capped at maxint
+
+(interface (subtract $<X from $<Y into $>Z))    %% safe, capped at 0
+
+(interface (multiply $<X by $<Y into $>Z))      %% safe, capped at maxint
+
+(interface (split $<Number into $>Thousands $>Hundreds $>Tens $>Ones))
+
+(interface (sort $<X $<Y into $>High $>Low))
+
+(interface (take last $<N from $<List into $>Suffix))
+
+(interface (replace element $<N in $<List with $<Element into $>NewList))
+
+(interface (decrease element $<N in $<List by $<Num into $>NewList))
+
+(interface (increase element $<N in $<List by $<Num into $>NewList))
+
+(interface (increase element $<N in $<List by $<Num into $>New with max $<Max))
+
+(interface ($<List begins with sublist $<Sublist))
+
+%% From a list of lists, select the sublists where a specific element matches
+%% the key, and return a list of them.
+(interface (take from $<List where element $<Num is $<Key into $>Sublist))
+
+%% From a list of lists, find the first (and only, if we know there are no
+%% duplicates) sublist where the key matches a specific element.
+(interface (find in $<List element $<Num is $<Key into $>Match))
+
+%% From a list of lists, find the first (and only, if we know there are no
+%% duplicates) sublist that begins with the specified sublist.
+(interface (find in $<List beginning with sublist $<Head into $>Match))
+
+%% Same, but construct a sublist to search for two elements
+(interface (find $X $Y in $List into $Match))
+
+(interface (set element $<Num in $<Head in $<List to $<Value into $>NewList))
+
+(interface (random element from $<List into $>Choice))
+
+%%------------------------------ IMPLEMENTATION ------------------------------
+
+($Num is odd) %% yagni?
+	(number $Num)
+	($Num > 0)
+	($Num modulo 2 into $Mod)
+	($Mod = 1)
+
+($Num is even) %% yagni?
+	($Num > 0)
+	~($Num is odd)
+
+(max $X and $Y into $Result)
+	(if) ($X > $Y) (then)
+		($Result = $X)
+	(else)
+		($Result = $Y)
+	(endif)
+
+(min $X and $Y into $Result)
+	(if) ($X < $Y) (then)
+		($Result = $X)
+	(else)
+		($Result = $Y)
+	(endif)
+
+($X delta $Y into $Result)
+	(if) ($X > $Y) (then)
+		($X minus $Y into $Result)
+	(else)
+		($Y minus $X into $Result)
+	(endif)
+
+(add $X to $Y into $Z max $Max)
+    (if) ~($X plus $Y into $Sum) (then)
+	    ($Z = $Max)
+	(else)
+		($X plus $Y into $Sum)
+	    (min $Sum and $Max into $Z)
+	(endif)
+
+(add $X to $Y into $Z)
+	(add $X to $Y into $Z max 16383)
+
+(subtract $Y from $X into $Z)
+    (if) ($Y > $X) (then)
+		($Z = 0)
+	(else)
+		($X minus $Y into $Z)
+	(endif)
+
+(multiply $X by $Y into $Z)
+    (if) ~($X times $Y into $Product) (then)
+		($Z = 16383)
+	(else)
+		($Z = $Product)
+	(endif)
+
+(split $Number into $Thousands $Hundreds $Tens $Ones)
+	($Number divided by 1000 into $Thousands)
+	($Number modulo 1000 into $Remaining1)
+	($Remaining1 divided by 100 into $Hundreds)
+	($Remaining1 modulo 100 into $Remaining2)
+	($Remaining2 divided by 10 into $Tens)
+	($Remaining2 modulo 10 into $Ones)
+
+(sort $X $Y into $RX $RY)
+	(if) ($X > $Y) (then)
+		($RX = $Y)
+		($RY = $X)
+	(else)
+		($RX = $X)
+		($RY = $Y)
+	(endif)
+
+(take last $N from $List into $Suffix)
+	(reverse $List $Reverse)
+	(take $N from $Reverse into $After)
+	(reverse $After $Suffix)
+
+(replace element $N in $List with $Element into $NewList)
+	($N > 0)
+	(length of $List into $Len)
+	~($Len < $N) %% fail fast if trying to replace past end of list
+	($N minus 1 into $PrefixLen)
+	($Len minus $N into $SuffixLen)
+	(take $PrefixLen from $List into $Prefix)
+	(take last $SuffixLen from $List into $Suffix)
+	(append $Prefix [$Element] $Front)
+	(append $Front $Suffix $NewList)
+
+(increase element $N in $List by $Num into $NewList)
+	(nth $List $N $Element)
+	($Element plus $Num into $NewElement)
+	(replace element $N in $List with $NewElement into $NewList)
+
+(increase element $N in $List by $Num into $NewList with max $Max)
+	(nth $List $N $Element)
+	($Element plus $Num into $Proposed)
+	(if) ($Proposed > $Max) (then)
+		($NewElement = $Max)
+	(else)
+		($NewElement = $Proposed)
+	(endif)
+	(replace element $N in $List with $NewElement into $NewList)
+
+(decrease element $N in $List by $Num into $NewList)
+	(nth $List $N $Element)
+	($Element minus $Num into $NewElement)
+	(replace element $N in $List with $NewElement into $NewList)
+
+(take from $List where element $Num is $Key into $Sublist)
+	(if) (empty $List) (then)
+	    ($Sublist = [])
+	(else)
+		($List = [$Head | $Tail])
+	    (nth $Head $Num $Value)
+	    (if) ($Value = $Key) (then)
+	        (take from $Tail where element $Num is $Key into $Remainder)
+ 		    (append [$Head] $Remainder $Sublist)
+	    (else)
+	        (take from $Tail where element $Num is $Key into $Sublist)
+	    (endif)
+	(endif)
+
+($List begins with sublist $Sublist)
+	(length of $Sublist into $Length)
+	(take $Length from $List into $Prefix)
+	($Sublist = $Prefix)
+
+(find in $List beginning with sublist $Sublist into $Match)
+  	~(empty $List) %% fail if we don't find it
+	($List = [$Head | $Tail])
+	(if) ($Head begins with sublist $Sublist) (then)
+		($Match = $Head)
+	(else)
+	    (find in $Tail beginning with sublist $Sublist into $Match)
+	(endif)
+
+(find $X $Y in $List into $Match)
+	(find in $List beginning with sublist [$X $Y] into $Match)
+
+(set element $Num in $Sublist in $List to $Value into $NewList)
+	(if) (empty $List) (then)
+		($NewList = [])
+	(else)
+		($List = [$Head | $Tail])
+		(if) ($Head begins with sublist $Sublist) (then)
+			 (replace element $Num in $Head with $Value into $NewHead)
+			 ($NewList = [$NewHead | $Tail])
+		(else)
+		     (set element $Num in $Sublist in $Tail to $Value into $NewTail)
+			 ($NewList = [$Head | $NewTail])
+		(endif)
+	(endif)
+
+(random element from $List into $Element)
+    (length of $List into $Len)
+	(random from 1 to $Len into $Choice)
+	(nth $List $Choice $Element)

@@ -23,4 +23,4 @@ time:
 clean:
 	rm -f *~ \#*\# *.z8 *.zblorb *.aastory *.d64 *.d71
 
-.PHONY: test all clean utils time 3d6
+.PHONY: test all clean utils time 3d6 3d6-lite 3d6-extra

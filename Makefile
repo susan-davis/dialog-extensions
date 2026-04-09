@@ -3,7 +3,7 @@ all: test
 DEBUG=dgdebug -u
 STDLIB=unit.dg stdlib.dg
 
-test: utils time 3d6
+test: utils time 3d6 3d6-lite
 
 utils:
 	$(DEBUG) utils-tests.dg utils.dg $(STDLIB)

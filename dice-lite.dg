@@ -3,9 +3,13 @@
 %% Swap this in if you want to reduce output size and have been using 3d6.dg.
 %% Do not include 3d6.dg if you include this file.
 
-(extension version)	Simple die rolls v0.1 by Susan Davis (line)
+(extension version)	Simple die rolls v0.2 by Susan Davis (line)
 
 %%-------------------------------- INTERFACES ---------------------------------
+
+(interface (d3 $>Roll))
+
+(interface (d4 $>Roll))
 
 (interface (1d6 $>Roll))
 
@@ -19,12 +23,45 @@
 
 (interface (3d6 $>First $>Second $>Third))
 
-%% these do nothing, and are here for compatibility with 3d6.dg
-(interface (shuffle randomness))
+(interface (d8 $>Roll))
 
-(interface (reset randomness))
+(interface (d12 $>Roll))
+
+(interface (1d10 $>Roll))
+
+(interface (2d10 $>Total))
+
+(interface (2d10 $>First $>Second))
+
+(interface (d20 $>Roll))
+
+(interface (d36 $>Roll))
+
+(interface (d100 $>Percent))
+
+(interface (d216 $>Roll))
+
+(interface (d360 $>Roll)) %% great for random facing
+
+(interface (percentage of $<Number into $>Result))
+
+%% These two rules do nothing, and are here for compatibility with dice.dg.
+
+(interface (shuffle randomness)) %% do nothing
+
+(interface (reset randomness)) %% do nothing
 
 %%------------------------------ IMPLEMENTATION -------------------------------
+
+(shuffle randomness) %% do nothing
+
+(reset randomness) %% do nothing
+
+(d3 $Roll)
+	(random from 1 to 3 into $Roll)
+
+(d4 $Roll)
+	(random from 1 to 4 into $Roll)
 
 (1d6 $Roll)
 	(random from 1 to 6 into $Roll)
@@ -51,6 +88,34 @@
 	(1d6 $Second)
 	(1d6 $Third)
 
-(shuffle randomness) %% do nothing
+(d8 $Roll)
+	(random from 1 to 8 into $Roll)
 
-(reset randomness) %% do nothing
+(1d10 $Roll)
+	(random from 1 to 10 into $Roll)
+
+(2d10 $Total)
+	(1d10 $First)
+	(1d10 $Second)
+	($First plus $Second into $Total)
+
+(d12 $Roll)
+	(random from 1 to 12 into $Roll)
+
+(d20 $Roll)
+	(random from 1 to 20 into $Roll)
+
+(d36 $Roll)
+	(random from 1 to 36 into $Roll)
+
+(d216 $Roll)
+	(random from 1 to 216 into $Roll)
+
+(d360 $Roll)
+	(random from 1 to 360 into $Roll)
+
+(d100 $Percent)
+	(random from 1 to 100 into $Percent)
+
+(percentage of $Number into $Result)
+	(random from 1 to $Number into $Result)

@@ -1,9 +1,11 @@
 %% dice.dg
 %% include utils.dg when compiling or debugging
 
-(extension version)	Undo-safe die rolls v0.2 by Susan Davis (line)
+(extension version)	Undo-safe die rolls v0.4 by Susan Davis (line)
 
 %%-------------------------------- INTERFACES ---------------------------------
+
+(interface (d3 $>Roll))
 
 (interface (1d6 $>Roll))
 
@@ -16,6 +18,24 @@
 (interface (3d6 $>Total))
 
 (interface (3d6 $>First $>Second $>Third))
+
+(interface (1d10 $>Roll))
+
+(interface (2d10 $>Total))
+
+(interface (2d10 $>First $>Second))
+
+(interface (d20 $>Roll))
+
+(interface (d36 $>Roll))
+
+(interface (d100 $>Percent))
+
+(interface (d216 $>Roll))
+
+(interface (d360 $>Roll)) %% great for random facing
+
+(interface (percentage of $<Number into $>Result))
 
 %% Call this at program entry to give a different sequence of rolls every game.
 (interface (shuffle randomness))
@@ -80,13 +100,17 @@
 	($Position plus 1 into $NewPosition)
 	(now) (random list position $NewPosition)
 
+(d3 $Roll)
+	(1d6 $Die)
+	($Die divided by 2 into $Roll rounding up)
+
 (1d6 $Roll)
 	(random choice $Num)
 	($Num modulo 10 into $Roll)
 
 (2d6 $First $Second)
 	(random choice $Num)
-	(split $Num into $ $First $Second $)
+	(split $Num into $ $ $First $Second)
 
 (2d6 $Total)
 	(2d6 $First $Second)
@@ -104,3 +128,70 @@
 	(3d6 $First $Second $Third)
 	($First plus $Second into $Sum)
 	($Sum plus $Third into $Total)
+
+(1d10 $Roll)
+	(random choice $Num)
+	(split $Num into $Roll $ $ $)
+
+(2d10 $Total)
+	(2d10 $First $Second)
+	($First plus $Second into $Total)
+
+(2d10 $First $Second)
+	(1d10 $First)
+	(1d10 $Second)
+
+(d20 $Roll)
+	(random choice $Num)
+	(split $Num into $First $Second $ $)
+	(if) ($Second > 3) (then)
+		($First plus 10 into $Roll)
+	(else)
+		($First = $Roll)
+	(endif)
+
+(d36 $Total)
+	(random choice $Num)
+	(split $Num into $ $ $Second $Ones)
+	($Second minus 1 into $Upper)
+	($Upper times 6 into $Sixes)
+	($Ones plus $Sixes into $Total)
+
+(d100 $Percent)
+	(2d10 $First $Ones)
+	(if) ($First = 10) (then)
+		($Upper = 0)
+	(else)
+		($Upper = $First)
+	(endif)
+	(10 times $Upper into $Tens)
+	($Tens plus $Ones into $Percent)
+
+(d216 $Total)
+	(random choice $Num)
+	(split $Num into $ $Third $Second $Ones)
+	($Second minus 1 into $Middle)
+	($Middle times 6 into $Sixes)
+	($Ones plus $Sixes into $Sum)
+	($Third minus 1 into $Upper)
+	($Upper times 36 into $ThirtySixes)
+	($ThirtySixes plus $Sum into $Total)
+
+(d360 $Total) %% build backwards
+	(random choice $Num)
+	(split $Num into $First $Second $Third $Fourth)
+	($First minus 1 into $Ones)
+	($Second minus 1 into $Lower)
+	($Lower times 10 into $Tens)
+	($Ones plus $Tens into $Sum)
+	($Third minus 1 into $Middle)
+	($Middle times 60 into $Sixties)
+	(if) ($Fourth > 3) (then)
+		($Sixties times 2 into $Centuries)
+	(else)
+		($Sixties = $Centuries)
+	(endif)
+	($Sum plus $Centuries into $Total)
+
+(percentage of $ into $)
+	Not implemented

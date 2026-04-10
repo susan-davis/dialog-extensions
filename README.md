@@ -5,7 +5,11 @@ Useful extensions for the Dialog domain-specific Interactive Fiction language.
 
 `time.dg` -- Useful utilities for handling the date and time of day.
 
-`3d6.dg` -- `UNDO`-safe random number generator, based around rolling six-sided dice.
+`dice.dg` -- `UNDO`-safe random number generator, based around rolling six-sided dice.
+
+`more-dice.dg` -- Additional die rolling options.
+
+`dice-lite.dg` -- Smaller footprint version of `dice.dg` for vintage hardware.
 
 `utils.dg` -- Grab bag of useful methods for arithmetic and list handling.
 

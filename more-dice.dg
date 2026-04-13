@@ -3,8 +3,6 @@
 
 %%-------------------------------- INTERFACES ---------------------------------
 
-(interface (d3 $>Roll))
-
 (interface (d4 $>Roll))
 
 (interface (2d6 $>Total DARO)) %% doubles add and roll over (T&T)
@@ -42,10 +40,6 @@
 (interface (roll $<Num dice with target $<Target into $>Successes))
 
 %%------------------------------ IMPLEMENTATION -------------------------------
-
-(d3 $Roll)
-	(1d6 $Die)
-	($Die divided by 2 into $Roll rounding up)
 
 (d4 $Roll)
 	(d36 $Die)

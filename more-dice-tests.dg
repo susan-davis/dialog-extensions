@@ -15,8 +15,12 @@
 	  #1dF
 	  #2dF
 	  #4dF
-	  #attack-roll-with-spite
-	  #dice-pool-against-target
+	  #3d-attack-roll-with-spite
+	  #4d-attack-roll-with-spite
+	  #5d-attack-roll-with-spite
+	  #7-die-pool-against-target
+	  #8-die-pool-against-target
+	  #9-die-pool-against-target
 	  ])
 
 (set up $)	(reset randomness)
@@ -74,19 +78,40 @@
 	(d6 times d6 18)
 
 (test #min-mid-max)
-	Not implemented
+	(min mid max 4 5 6)
+	(min mid max 1 3 4)
+	(min mid max 3 5 6)
+	(min mid max 5 6 6)
+	(min mid max 1 4 6)
+	(min mid max 1 5 5)
 
 (test #d8)
-	Not implemented
+    (d8 8)
+	(d8 4)
+	(d8 5)
+	(d8 8)
+	(d8 6)
+	(d8 2)
 
 (test #d12)
-	Not implemented
+    (d12 10)
+	(d12 5)
+	(d12 6)
+	(d12 10)
+	(d12 8)
+	(d12 2)
 
 (test #d20-with-advantage)
-	Not implemented
+	(d20 19 with advantage)
+	(d20 16 with advantage)
+	(d20 12 with advantage)
+	(d20 13 with advantage)
 
 (test #d20-with-disadvantage)
-	Not implemented
+	(d20 13 with disadvantage)
+	(d20 15 with disadvantage)
+	(d20 9 with disadvantage)
+	(d20 4 with disadvantage)
 
 (test #1dF)
 	Not implemented
@@ -97,8 +122,20 @@
 (test #4dF)
 	Not implemented
 
-(test #attack-roll-with-spite)
+(test #3d-attack-roll-with-spite)
 	Not implemented
 
-(test #dice-pool-against-target)
+(test #4d-attack-roll-with-spite)
+	Not implemented
+
+(test #5d-attack-roll-with-spite)
+	Not implemented
+
+(test #7-die-pool-against-target)
+	Not implemented
+
+(test #8-die-pool-against-target)
+	Not implemented
+
+(test #9-die-pool-against-target)
 	Not implemented

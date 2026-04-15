@@ -1,6 +1,8 @@
 %% dgdebug -u more-dice-tests.dg more-dice.dg dice.dg utils.dg unit.dg stdlib.dg
 
 (list of tests [
+	  #2d3-individual
+	  #2d3-total
 	  #d4
 	  #2d6-daro
 	  #3d6-taro
@@ -20,6 +22,10 @@
 (set up $)	(reset randomness)
 
 %%-----------------------------------------------------------------------------
+
+(test #2d3-individual)
+
+(test #2d3-total)
 
 (test #d4)
 	Not implemented

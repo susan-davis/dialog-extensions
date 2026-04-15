@@ -1,0 +1,64 @@
+%% dgdebug -u more-dice-tests.dg more-dice.dg dice.dg unit.dg stdlib.dg
+
+(list of tests [
+	  #d4
+	  #2d6-daro
+	  #3d6-taro
+	  #d6xd6
+	  #min-mid-max
+	  #d8
+	  #d12
+	  #d20-with-advantage
+	  #d20-with-disadvantage
+	  #1dF
+	  #2dF
+	  #4dF
+	  #attack-roll-with-spite
+	  #dice-pool-against-target
+	  ])
+
+(set up $)	(reset randomness)
+
+%%-----------------------------------------------------------------------------
+
+(test #d4)
+	Not implemented
+
+(test #2d6-daro)
+	Not implemented
+
+(test #3d6-taro)
+	Not implemented
+
+(test #d6xd6)
+	Not implemented
+
+(test #min-mid-max)
+	Not implemented
+
+(test #d8)
+	Not implemented
+
+(test #d12)
+	Not implemented
+
+(test #d20-with-advantage)
+	Not implemented
+
+(test #d20-with-disadvantage)
+	Not implemented
+
+(test #1dF)
+	Not implemented
+
+(test #2dF)
+	Not implemented
+
+(test #4dF)
+	Not implemented
+
+(test #attack-roll-with-spite)
+	Not implemented
+
+(test #dice-pool-against-target)
+	Not implemented

@@ -24,20 +24,54 @@
 %%-----------------------------------------------------------------------------
 
 (test #2d3-individual)
+	(2d3 2 3)
+	(2d3 2 2)
+	(2d3 3 2)
+	(2d3 3 3)
+	(2d3 1 2)
+	(2d3 3 1)
 
 (test #2d3-total)
+	(2d3 5)
+	(2d3 4)
+	(2d3 5)
+	(2d3 6)
+	(2d3 3)
+	(2d3 4)
 
 (test #d4)
-	Not implemented
+	(d4 4)
+	(d4 2)
+	(d4 2)
+	(d4 4)
+	(d4 3)
+	(d4 1)
 
 (test #2d6-daro)
-	Not implemented
+	(now) (3d6 list position 9)
+	(2d6 9 DARO)
+	(2d6 18 DARO)
+	(3d6 list position 13)
+	(2d6 5 DARO)
+	(now) (3d6 list position 17)
+	(2d6 5 DARO)
+	(3d6 list position 19)
 
 (test #3d6-taro)
-	Not implemented
+	(now) (3d6 list position 9)
+	(3d6 10 TARO)
+	(3d6 14 TARO)
+	(3d6 11 TARO)
+	(3d6 list position 13)
 
 (test #d6xd6)
-	Not implemented
+	(d6 times d6 20)
+	(d6 times d6 12)
+	(d6 times d6 15)
+	(d6 times d6 30)
+	(d6 times d6 4)
+	(d6 times d6 5)
+	(d6 times d6 18)
 
 (test #min-mid-max)
 	Not implemented

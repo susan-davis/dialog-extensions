@@ -73,7 +73,7 @@
 	($First plus $Second into $FirstTwo)
 	(if) ($First = $Second) ($Second = $Third) (then)
 		($FirstTwo plus $Third into $Sum)
-		(3d6 $Bonus DARO)
+		(3d6 $Bonus TARO)
 		($Sum plus $Bonus into $Total)
 	(else)
 		($FirstTwo plus $Third into $Total)
@@ -102,12 +102,12 @@
 (d20 $Roll with advantage)
 	(d20 $First)
 	(d20 $Second)
-	(max $First $Second $Roll)
+	(max $First and $Second into $Roll)
 
 (d20 $Roll with disadvantage)
 	(d20 $First)
 	(d20 $Second)
-	(min $First $Second $Roll)
+	(min $First and $Second into $Roll)
 
 
 %%-----------------------------------------------------------------------------
@@ -171,7 +171,7 @@
 	($Roll plus $More into $Total)
 	($S3 plus $MoreSixes into $Sixes)
 
-(roll 0 dice with target $Target into $Successes)
+(roll 0 dice with target $ into $Successes)
 	($Successes = 0)
 
 (roll 1 dice with target $Target into $Successes)
@@ -187,7 +187,7 @@
 	(3d6 $First $Second $Third)
 	(match die $First $Target 0 $S1)
 	(match die $Second $Target $S1 $S2)
-	(match die $Third $S2 $Successes)
+	(match die $Third $Target $S2 $S3)
 	($Num minus 3 into $Remaining)
 	(roll $Remaining dice with target $Target into $More)
 	($S3 plus $More into $Successes)

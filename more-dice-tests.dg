@@ -15,9 +15,9 @@
 	  #1dF
 	  #2dF
 	  #4dF
-	  #3d-attack-roll-with-spite
 	  #4d-attack-roll-with-spite
 	  #5d-attack-roll-with-spite
+	  #6d-attack-roll-with-spite
 	  #7-die-pool-against-target
 	  #8-die-pool-against-target
 	  #9-die-pool-against-target
@@ -137,20 +137,41 @@
 	(4dF #down 1)
 	(4dF #up   1)
 
-(test #3d-attack-roll-with-spite)
-	Not implemented
-
 (test #4d-attack-roll-with-spite)
-	Not implemented
+	(roll 4 dice 16 1)
+	(roll 4 dice 20 2)
+	(roll 4 dice 16 1)
+	(roll 4 dice 19 2)
 
 (test #5d-attack-roll-with-spite)
-	Not implemented
+	(roll 5 dice 22 1)
+	(roll 5 dice 25 2)
+	(roll 5 dice 17 1)
+	(roll 5 dice 24 3)
+
+(test #6d-attack-roll-with-spite)
+	(roll 6 dice 23 1)
+	(roll 6 dice 31 3)
+	(roll 6 dice 22 1)
+	(roll 6 dice 28 3)
 
 (test #7-die-pool-against-target)
-	Not implemented
+	(roll 7 dice with target 5 into 3)
+	(roll 7 dice with target 5 into 5)
+	(roll 7 dice with target 5 into 3)
+	(roll 7 dice with target 5 into 3)
+	(roll 7 dice with target 5 into 1)
 
 (test #8-die-pool-against-target)
-	Not implemented
+	(roll 8 dice with target 5 into 3)
+	(roll 8 dice with target 5 into 5)
+	(roll 8 dice with target 5 into 4)
+	(roll 8 dice with target 5 into 2)
+	(roll 8 dice with target 5 into 1)
 
 (test #9-die-pool-against-target)
-	Not implemented
+	(roll 9 dice with target 5 into 4)
+	(roll 9 dice with target 5 into 6)
+	(roll 9 dice with target 5 into 4)
+	(roll 9 dice with target 5 into 3)
+	(roll 9 dice with target 5 into 1)

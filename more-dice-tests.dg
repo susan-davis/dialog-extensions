@@ -114,13 +114,28 @@
 	(d20 4 with disadvantage)
 
 (test #1dF)
-	Not implemented
+	(1dF #up   1)
+	(1dF #down 1)
+	(1dF #up   1)
+	(1dF #up   1)
+	(1dF #up   1)
+	(1dF #up   1)
 
 (test #2dF)
-	Not implemented
+	(2dF #up   1)
+	(2dF 0     0)
+	(2dF #up   1)
+	(2dF #up   2)
+	(2dF #down 1)
+	(2dF 0     0)
 
 (test #4dF)
-	Not implemented
+	(4dF #up   1)
+	(4dF #up   3)
+	(4dF #down 1)
+	(4dF #up   2)
+	(4dF #down 1)
+	(4dF #up   1)
 
 (test #3d-attack-roll-with-spite)
 	Not implemented

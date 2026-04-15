@@ -1,4 +1,4 @@
-%% dgdebug -u more-dice-tests.dg more-dice.dg dice.dg unit.dg stdlib.dg
+%% dgdebug -u more-dice-tests.dg more-dice.dg dice.dg utils.dg unit.dg stdlib.dg
 
 (list of tests [
 	  #d4

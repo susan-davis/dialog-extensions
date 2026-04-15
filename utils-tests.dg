@@ -13,6 +13,11 @@
 	#delta-2-4
 	#delta-2-2
 	#delta-0-0
+	#range-5-3
+	#range-3-5
+	#range-3-3
+	#range-0-3
+	#range-0-0
 	#3-div-3-rounding-up
 	#4-div-3-rounding-up
 	#5-div-3-rounding-up
@@ -77,10 +82,15 @@
 	#set-4-in-32456-to-7
 	#dont-set-6-in-12345
 	#dont-set-0-in-12345
-	#random-from-list
-	#random-from-empty-list
 	#find-type-and-id
 	#dont-find-type-and-id
+	#remove-1-2
+	#remove-2-2
+	#remove-3-2
+	#remove-4-1
+	#remove-7-7
+	#remove-1-2-twice
+	#remove-3-2-twice
 	])
 
 (global variable (list of lists [
@@ -133,6 +143,21 @@
 
 (test #delta-0-0)
 	(0 delta 0 into 0)
+
+(test #range-5-3)
+	(5 is within 2 of 3)
+
+(test #range-3-5)
+	(3 is within 2 of 5)
+
+(test #range-3-3)
+	(3 is within 0 of 3)
+
+(test #range-0-3)
+	(0 is within 3 of 3)
+
+(test #range-0-0)
+	(0 is within 0 of 0)
 
 (test #3-div-3-rounding-up)
 	(3 divided by 3 into 1 rounding up)
@@ -347,14 +372,6 @@
 	(list of lists $List)
 	~(set element 0 in [1 2] in $List to 6 into $)
 
-(test #random-from-list)
-    (random element from [867 5309 512 16163] into $Num)
-	$Num
-	{ ($Num = 867) (or) ($Num = 5309) (or) ($Num = 512) (or) ($Num = 16163) }
-
-(test #random-from-empty-list)
-    ~(random element from [] into $)
-
 (test #find-type-and-id)
 	  (list of lists $List)
 	  (find 2 2 in $List into [2 2 4 5 6])
@@ -362,3 +379,62 @@
 (test #dont-find-type-and-id)
 	  (list of lists $List)
 	  ~(find 9 9 in $List into $)
+
+(test #remove-1-2)
+	  (list of lists $List)
+	  (remove 1 2 from $List into $NewList)
+	  (assert $NewList = [
+		[2 2 4 5 6]
+		[3 2 4 5 6]
+		[3 2 4 6 7]
+		[4 1 7 8 9]])
+
+(test #remove-1-2-twice)
+	  (list of lists $List)
+	  (remove 1 2 from $List into $NewList)
+	  (remove 1 2 from $NewList into $NewerList)
+	  (assert $NewerList = [
+		[2 2 4 5 6]
+		[3 2 4 5 6]
+		[3 2 4 6 7]
+		[4 1 7 8 9]])
+
+(test #remove-2-2)
+	  (list of lists $List)
+	  (remove 2 2 from $List into $NewList)
+	  (assert $NewList = [
+	  	[1 2 3 4 5]
+		[3 2 4 5 6]
+		[3 2 4 6 7]
+		[4 1 7 8 9]])
+
+(test #remove-3-2)
+	  (list of lists $List)
+	  (remove 3 2 from $List into $NewList)
+	  (assert $NewList = [
+	  	[1 2 3 4 5]
+		[2 2 4 5 6]
+		[3 2 4 6 7]
+		[4 1 7 8 9]])
+
+(test #remove-3-2-twice)
+	  (list of lists $List)
+	  (remove 3 2 from $List into $NewList)
+	  (remove 3 2 from $NewList into $NewerList)
+	  (assert $NewerList = [
+	  	[1 2 3 4 5]
+		[2 2 4 5 6]
+		[4 1 7 8 9]])
+
+(test #remove-4-1)
+	  (list of lists $List)
+	  (remove 4 1 from $List into $NewList)
+	  (assert $NewList = [
+	  	[1 2 3 4 5]
+		[2 2 4 5 6]
+		[3 2 4 5 6]
+		[3 2 4 6 7]])
+
+(test #remove-7-7)
+	  (list of lists $List)
+	  (remove 7 7 from $List into $List)

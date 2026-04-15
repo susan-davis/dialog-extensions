@@ -15,6 +15,8 @@
 
 (interface ($<Num1 delta $<Num2 into $>Result))
 
+(interface ($<Num1 is within $<Range of $<Num2))
+
 (interface (add $<X to $<Y into $>Z))           %% safe, capped at maxint
 
 (interface (add $<X to $<Y into $>Z max $<Max)) %% safe, capped at maxint
@@ -54,11 +56,13 @@
 (interface (find in $<List beginning with sublist $<Head into $>Match))
 
 %% Same, but construct a sublist to search for two elements
-(interface (find $X $Y in $List into $Match))
+(interface (find $<X $<Y in $<List into $>Match))
 
 (interface (set element $<Num in $<Head in $<List to $<Value into $>NewList))
 
-(interface (random element from $<List into $>Choice))
+(interface (remove from $<List beginning with sublist $<Head into $>NewList))
+
+(interface (remove $<X $<Y from $<List into $>NewList))
 
 %%------------------------------ IMPLEMENTATION ------------------------------
 
@@ -92,6 +96,10 @@
 	(else)
 		($Y minus $X into $Result)
 	(endif)
+
+($Num1 is within $Range of $Num2)
+	($Num1 delta $Num2 into $Delta)
+	~($Delta > $Range)
 
 (add $X to $Y into $Z)
     (add $X to $Y into $Z max 16383)
@@ -202,6 +210,22 @@
 (find $X $Y in $List into $Match)
 	(find in $List beginning with sublist [$X $Y] into $Match)
 
+(remove from $List beginning with sublist $Sublist into $NewList)
+  	(if) ~(empty $List) (then)
+		($List = [$Head | $Tail])
+		(if) ($Head begins with sublist $Sublist) (then)
+			($NewList = $Tail)
+		(else)
+			(remove from $Tail beginning with sublist $Sublist into $Remainder)
+			(append [$Head] $Remainder $NewList)
+		(endif)
+	(else)
+		($NewList = [])
+	(endif)
+
+(remove $X $Y from $List into $NewList)
+	(remove from $List beginning with sublist [$X $Y] into $NewList)
+
 (set element $Num in $Sublist in $List to $Value into $NewList)
 	(if) (empty $List) (then)
 		($NewList = [])
@@ -215,8 +239,3 @@
 			 ($NewList = [$Head | $NewTail])
 		(endif)
 	(endif)
-
-(random element from $List into $Element)
-    (length of $List into $Len)
-	(random from 1 to $Len into $Choice)
-	(nth $List $Choice $Element)

@@ -19,5 +19,7 @@ Useful extensions for the Dialog domain-specific Interactive Fiction language.
 
 `stdlib.dg` -- Dialog standard library. Get this from the Dialog source distribution for the version that matches the compiler that you're using.
 
+`Makefile` -- Run `make` to run the unit tests.
+
 ## Building
 This is a library of source code. Simply include the files in your own projects, and you're done. You can run the unit tests with `make`, if desired.

@@ -13,6 +13,8 @@ Useful extensions for the Dialog domain-specific Interactive Fiction language.
 
 `utils.dg` -- Grab bag of useful methods for arithmetic and list handling.
 
+`grid-movement.dg` -- Implement grid movement in a large open space.
+
 `unit.dg` -- Standard Dialog unit testing framework. Get this from the Dialog source distribution for the most up-to-date version.
 
 `stdlib.dg` -- Dialog standard library. Get this from the Dialog source distribution for the version that matches the compiler that you're using.

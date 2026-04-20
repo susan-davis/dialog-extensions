@@ -3,7 +3,7 @@ all: test
 DEBUG=dgdebug -u
 STDLIB=unit.dg stdlib.dg
 
-test: utils time dice dice-lite more-dice
+test: utils time dice dice-lite
 
 utils:
 	$(DEBUG) utils-tests.dg utils.dg $(STDLIB)
@@ -15,13 +15,10 @@ dice:
 	$(DEBUG) dice-tests.dg dice.dg utils.dg $(STDLIB)
 
 dice-lite:
-	$(DEBUG) dice-lite-tests.dg dice-lite.dg $(STDLIB)
+	$(DEBUG) dice-lite-tests.dg dice-lite.dg utils.dg $(STDLIB)
 
 dice-extra:
 	$(DEBUG) dice-lite-tests.dg dice.dg utils.dg $(STDLIB)
-
-more-dice:
-	$(DEBUG) more-dice-tests.dg more-dice.dg dice.dg utils.dg $(STDLIB)
 
 clean:
 	rm -f *~ \#*\# *.z8 *.zblorb *.aastory *.d64 *.d71

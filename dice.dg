@@ -21,15 +21,15 @@
 
 (interface (2d6 $>Total DARO)) %% doubles add and roll over (T&T)
 
-(interface (3d6 $>Total TARO)) %% triples add and roll over (T&T)
-
-(interface (min mid max $>Min $>Mid $>Max))
-
 (interface (d6 times d6 $>Total))
 
 (interface (3d6 $>Total))
 
 (interface (3d6 $>First $>Second $>Third))
+
+(interface (3d6 $>Total TARO)) %% triples add and roll over (T&T)
+
+(interface (min mid max $>Min $>Mid $>Max))
 
 (interface (d8 $>Roll))
 
@@ -233,6 +233,8 @@
 		($Tens = $Roll)
 	(endif)
 
+%%-----------------------------------------------------------------------------
+
 (2d3 $Total)
 	(2d3 $First $Second)
 	($First plus $Second into $Total)
@@ -296,7 +298,6 @@
 	(d20 $First)
 	(d20 $Second)
 	(min $First and $Second into $Roll)
-
 
 %%-----------------------------------------------------------------------------
 

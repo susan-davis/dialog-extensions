@@ -7,13 +7,11 @@ Useful extensions for the Dialog domain-specific Interactive Fiction language.
 
 `dice.dg` -- `UNDO`-safe random number generator, based around rolling six-sided dice.
 
-`more-dice.dg` -- Additional die rolling options.
-
 `dice-lite.dg` -- Smaller footprint version of `dice.dg` for vintage hardware.
 
 `utils.dg` -- Grab bag of useful methods for arithmetic and list handling.
 
-`grid-movement.dg` -- Implement grid movement in a large open space.
+`grid.dg` -- Implement grid movement in a large open space.
 
 `unit.dg` -- Standard Dialog unit testing framework. Get this from the Dialog source distribution for the most up-to-date version.
 

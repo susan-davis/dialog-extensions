@@ -8,9 +8,9 @@
 %% squares, with diagonal squares 14 units from each other, and only one
 %% object occupying a given square.
 
-(y increases south) %% un-negate to make Y increase as you go south, not north
-
 ~(x increases west) %% un-negate to make X increase as you go west, not east
+
+(y increases south) %% un-negate to make Y increase as you go south, not north
 
 %% The maximum grid size is 1160 x 1160, unless you're willing to have ranges
 %% not be able to be calcuated between two distant objects, in which case you
@@ -229,25 +229,25 @@
 		($X = $NX)
 		(1 north from $Y into $NY)
 	(elseif) ($Relation = #northeast) (then)
-		(1 east from $X into $NX)
+		(1 east  from $X into $NX)
 		(1 north from $Y into $NY)
 	(elseif) ($Relation = #east)      (then)
-		(1 east from $X into $NX)
+		(1 east  from $X into $NX)
 		($Y = $NY)
 	(elseif) ($Relation = #southeast) (then)
-		(1 east from $X into $NX)
+		(1 east  from $X into $NX)
 		(1 south from $Y into $NY)
 	(elseif) ($Relation = #south)     (then)
 		($X = $NX)
 		(1 south from $Y into $NY)
 	(elseif) ($Relation = #southwest) (then)
-		(1 west from $X into $NX)
+		(1 west  from $X into $NX)
 		(1 south from $Y into $NY)
 	(elseif) ($Relation = #west)      (then)
-		(1 west from $X into $NX)
+		(1 west  from $X into $NX)
 		($Y = $NY)
 	(elseif) ($Relation = #northwest) (then)
-		(1 west from $X into $NX)
+		(1 west  from $X into $NX)
 		(1 north from $Y into $NY)
 	(endif)
 

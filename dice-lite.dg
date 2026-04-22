@@ -3,7 +3,7 @@
 %% Swap this in if you want to reduce output size and have been using 3d6.dg.
 %% Do not include 3d6.dg if you include this file. Do include utils.dg.
 
-(extension version)	Simple die rolls v0.3 by Susan Davis (line)
+(extension version)	Simple die rolls v0.4 by Susan Davis (line)
 
 %%-------------------------------- INTERFACES ---------------------------------
 

@@ -63,6 +63,7 @@
 	(roll #d6 6)
 	(roll #d6 6)
 	(roll #d6 5)
+	~(3d6 has rolled over)
 
 (test #wrap-around-1d6)
  	(now) (3d6 list position 215)
@@ -71,6 +72,7 @@
 	(roll #d6 6)
 	(roll #d6 1)
 	(roll #d6 6)
+	(3d6 has rolled over)
 
 (test #two-roll-individual)
 	(roll 2 #d6 9)
@@ -114,6 +116,7 @@
 	(roll three #d6 6 5 6)
 	(roll three #d6 1 4 6)
 	(roll three #d6 5 1 5)
+	(3d6 has rolled over)
 
 (test #mix-one-and-three)
 	(roll #d6 6)
@@ -304,10 +307,20 @@
 	(roll 1dF #up   1)
 
 (test #2dF)
-	(roll 2dF $A    $B) $A $B
+	(roll 2dF #up   1)
+	(roll 2dF 0     0)
+	(roll 2dF #up   1)
+	(roll 2dF #up   2)
+	(roll 2dF #down 1)
+	(roll 2dF 0     0)
+	(roll 2dF #up   1)
+	(roll 2dF #up   1)
 
 (test #4dF)
-	(roll 4dF $A    $B) $A $B
+	(roll 4dF #up   1)
+	(roll 4dF #up   3)
+	(roll 4dF #down 1)
+	(roll 4dF #up   2)
 
 (test #4d-attack-roll-with-spite)
 	(roll 4 #d6 16 with 1 spite)

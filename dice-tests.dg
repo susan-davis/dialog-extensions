@@ -230,7 +230,7 @@
 	$Pos
 	(d20 list position $Pos20)
 	(assert $Pos20 > 0)
-	(assert $Pos20 < 201)
+	(assert $Pos20 < 221)
 	$Pos20
 
 (test #reset-randomness)

@@ -3,6 +3,7 @@ all: test
 DEBUG=dgdebug -u
 STDLIB=unit.dg stdlib.dg
 
+#add d6-lite
 test: utils time dice dice-lite d6 grid
 
 utils:

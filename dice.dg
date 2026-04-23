@@ -45,9 +45,9 @@
 
 (interface (roll $<Die1 times $<Die2 $>Total))
 
-(interface (roll $<Die1 times $<Die2 with bonus $<Bonus $>Total))
+(interface (roll $<Die1 times $<Die2 adding $<Bonus $>Total))
 
-(interface (roll $<Die1 times $<Die2 with penalty $<Penalty $>Total))
+(interface (roll $<Die1 times $<Die2 subtracting $<Penalty $>Total))
 
 %% Tunnels & Trolls style combat roll, with spite damage on every 1.
 %% We use 1 rather than 6 because it's on every die.
@@ -405,14 +405,14 @@
 	(endif)
 	($First times $Second into $Total)
 
-(roll $Die1 times $Die2 with bonus $Bonus $Total)
+(roll $Die1 times $Die2 adding $Bonus $Total)
 	(roll $Die1 $One)
 	(roll $Die2 $Two)
 	(sort $One $Two into $Low $Second)
 	($Low plus $Bonus into $First)
 	($First times $Second into $Total)
 
-(roll $Die1 times $Die2 with penalty $Penalty $Total)
+(roll $Die1 times $Die2 subtracting $Penalty $Total)
 	(roll $Die1 $One)
 	(roll $Die2 $Two)
 	(sort $One $Two into $Low $Second)

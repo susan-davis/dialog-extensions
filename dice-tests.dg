@@ -12,6 +12,7 @@
 	  #two-roll-total
 	  #three-roll-individual
 	  #three-roll-total
+	  #four-roll-individual
 	  #wrap-around-3d6
 	  #mix-one-and-three
 	  #2d10-total
@@ -127,6 +128,14 @@
 	(roll three #d6 6 5 6)
 	(roll three #d6 1 4 6)
 	(roll three #d6 5 1 5)
+
+(test #four-roll-individual)
+	(roll four #d6 4 5 4 3)
+	(roll four #d6 5 3 6 5)
+	(roll four #d6 1 4 5 1)
+	(roll four #d6 3 6 6 3)
+	(roll four #d6 4 5 1 1)
+	(roll four #d6 5 5 4 2)
 
 (test #three-roll-total)
 	(roll 3 #d6 15)
@@ -380,18 +389,16 @@
 (test #4dF)
 	(roll 4dF #up   1)
 	(roll 4dF #up   3)
-	(roll 4dF #down 1)
+	(roll 4dF #up   1)
 	(roll 4dF #up   2)
 	(roll 4dF #down 1)
-	(roll 4dF #up   1)
 
 (test #2-plus-4dF)
 	(2 plus 4dF 3)
 	(2 plus 4dF 5)
-	(2 plus 4dF 1)
+	(2 plus 4dF 3)
 	(2 plus 4dF 4)
 	(2 plus 4dF 1)
-	(2 plus 4dF 3)
 
 (test #4d-attack-roll-with-spite)
 	(roll 4 #d6 16 with 1 spite)

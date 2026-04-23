@@ -37,6 +37,8 @@
 
 (interface (roll three $<Dice plus $<Adds $>Total TARO))
 
+(interface (roll four $<Dice $>First $>Second $>Third $>Fourth))
+
 (interface (roll $<Dice min mid max $>Min $>Mid $>Max))
 
 (interface (roll $<First $<Second $<Third min mid max $>Min $>Mid $>Max))
@@ -188,6 +190,10 @@
 (roll three $Dice $First $Second $Third)
 	(roll two $Dice $First $Second)
 	(roll $Dice $Third)
+
+(roll four $Dice $First $Second $Third $Fourth)
+	(roll two $Dice $First $Second)
+	(roll two $Dice $Third $Fourth)
 
 (roll $Die max $Max $Total)
 	(roll $Die $Roll)

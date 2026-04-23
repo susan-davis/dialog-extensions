@@ -26,13 +26,16 @@
 	  #3d6-taro
 	  #d6xd6
 	  #min-mid-max
+	  #mixed-min-mid-max
 	  #d8
 	  #d12
 	  #d20-with-advantage
 	  #d20-with-disadvantage
 	  #1dF
 	  #2dF
+	  #1-plus-2dF
 	  #4dF
+	  #2-plus-4dF
 	  #4d-attack-roll-with-spite
 	  #5d-attack-roll-with-spite
 	  #6d-attack-roll-with-spite
@@ -275,6 +278,14 @@
 	(roll #d6 min mid max 1 4 6)
 	(roll #d6 min mid max 1 5 5)
 
+(test #mixed-min-mid-max)
+	(roll #d10 #d6 #d8 min mid max 3 6 9)
+	(roll #d6 #d10 #d8 min mid max 1 5 6)
+	(roll #d10 #d6 #d8 min mid max 2 6 9)
+	(roll #d10 #d6 #d8 min mid max 3 4 6)
+	(roll #d10 #d6 #d8 min mid max 1 2 6)
+	(roll #d10 #d6 #d8 min mid max 4 5 8)
+
 (test #d8)
 	(roll #d8 3)
 	(roll #d8 6)
@@ -323,11 +334,28 @@
 	(roll 2dF #up   1)
 	(roll 2dF #up   1)
 
+(test #1-plus-2dF)
+	(1 plus 2dF 2)
+	(1 plus 2dF 1)
+	(1 plus 2dF 2)
+	(1 plus 2dF 3)
+	(1 plus 2dF 0)
+
 (test #4dF)
 	(roll 4dF #up   1)
 	(roll 4dF #up   3)
 	(roll 4dF #down 1)
 	(roll 4dF #up   2)
+	(roll 4dF #down 1)
+	(roll 4dF #up   1)
+
+(test #2-plus-4dF)
+	(2 plus 4dF 3)
+	(2 plus 4dF 5)
+	(2 plus 4dF 1)
+	(2 plus 4dF 4)
+	(2 plus 4dF 1)
+	(2 plus 4dF 3)
 
 (test #4d-attack-roll-with-spite)
 	(roll 4 #d6 16 with 1 spite)

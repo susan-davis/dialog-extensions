@@ -557,6 +557,7 @@
 (percentage of 4 into $Percentage)
 	(roll #d4 $Percentage)
 
+%% TODO: make it not fall over for 16383
 (percentage of $Num into $Percentage)
 	(if) ($Num < 7) (then)
 		(roll #d6 max $Num $Percentage)

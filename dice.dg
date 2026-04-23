@@ -350,6 +350,14 @@
 
 %%-----------------------------------------------------------------------------
 
+(roll two $Dice $First $Second)
+	(roll $Dice $First)
+	(roll $Dice $Second)
+
+(roll three $Dice $First $Second $Third)
+	(roll two $Dice $First $Second)
+	(roll $Dice $Third)
+
 (roll $Die max $Max $Total)
 	(roll $Die $Roll)
 	(if) ($Roll > $Max) (then)
@@ -369,14 +377,6 @@
 	(else)
 		($Roll minus $Penalty into $Total)
 	(endif)
-
-(roll two $Dice $First $Second)
-	(roll $Dice $First)
-	(roll $Dice $Second)
-
-(roll three $Dice $First $Second $Third)
-	(roll two $Dice $First $Second)
-	(roll $Dice $Third)
 
 (roll $Die $Roll with advantage)
 	(roll two $Die $First $Second)
@@ -406,8 +406,22 @@
 	($First times $Second into $Total)
 
 (roll $Die1 times $Die2 with bonus $Bonus $Total)
+	(roll $Die1 $One)
+	(roll $Die2 $Two)
+	(sort $One $Two into $Low $Second)
+	($Low plus $Bonus into $First)
+	($First times $Second into $Total)
 
 (roll $Die1 times $Die2 with penalty $Penalty $Total)
+	(roll $Die1 $One)
+	(roll $Die2 $Two)
+	(sort $One $Two into $Low $Second)
+	(if) ($Low > $Penalty) (then)
+		($Low minus $Penalty into $First)
+	(else)
+		($First = 1)
+	(endif)
+	($First times $Second into $Total)
 
 (roll two $Dice $Total DARO)
 	(roll two $Dice $First $Second)

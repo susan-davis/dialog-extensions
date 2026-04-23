@@ -92,11 +92,11 @@
 %% They're normalized so that the hundreds digit can be used to make fair
 %% d20 rolls, and be perfectly fair if you stick to the first 200 list
 %% positions. They are *not* normalized so that combining the tens and the
-%% sixes stays fair. (For a d20, use the hundreds digit for 1-10 vs. 11-20.)
-%% I realized later that I could have gotten fair d20 rolls from the d216
-%% that I already had, but it's the same storage either way.
+%% sixes stays fair. Then, later still, I extended the list to 223, because
+%% it's a prime number, and patterns of how frequently you roll won't create
+%% loops that circle back to the same numbers more frequently.
 
-(global variable (list of random die rolls [ %% 432 bytes of storage
+(global variable (list of random die rolls [ %% 446 bytes of storage
 	 9456  3431  6536  5656  9146  2515  4366  3634  1451  2111  8551  4425
 	 7411 10253  7233 10164  1114  7124  8564  6364  9611  5535  5235  6435
 	 8312 10643  5236  2424  9131  1635  4661  4135  3214  3314  6246  1141
@@ -115,6 +115,7 @@
 	 9335  9636  9155  6613  2655  9212 10112  4455  8445 10664  3623 10211
 	 5645  6652  3122  2566  3213  2436  8244  5514 10152  8221  1151  4252
 	 8415  4563  6653  6115  7113  2352  5351 10464  9523  3165  9223  3612
+	 5565  2644  7524  1421  1323 10631 10125 %% 223 is a prime number
 	]))
 
 (global variable (3d6 list position 1))
@@ -128,12 +129,13 @@
 %% Starting at the beginning of the list gives the same output for every single
 %% game, which is good for unit tests, but can allow sketchy exploits in games.
 %% Call this once at the beginning of (program entry point) to start from a
-%% random spot in the list instead.
+%% random spot in the list instead. Change the rollover points to 223 if you
+%% call for the same number of random rolls every cycle.
 
 (shuffle randomness)
-	(random from 1 to 216 into $Position)
+	(random from 1 to 216 into $Position) %% or 223
 	(now) (3d6 list position $Position)
-	(random from 1 to 200 into $Pos)
+	(random from 1 to 220 into $Pos) %% or 223
 	(now) (d20 list position $Pos)
 
 (reset randomness)
@@ -144,7 +146,7 @@
 
 (3d6 choice $Num)
 	(3d6 list position $Pos)
-	(if) { ($Pos = 0) (or) ($Pos > 216) } (then)
+	(if) { ($Pos = 0) (or) ($Pos > 216) } (then) %% or 223
 		($Position = 1)
 	    (now) (3d6 list position $Position)
 		(now) (3d6 has rolled over)
@@ -158,7 +160,7 @@
 
 (d20 choice $Num)
 	(d20 list position $Pos)
-	(if) { ($Pos = 0) (or) ($Pos > 200) } (then)
+	(if) { ($Pos = 0) (or) ($Pos > 220) } (then) %% or 223
 		($Position = 1)
 	    (now) (d20 list position $Position)
 		(now) (d20 has rolled over)

@@ -17,12 +17,6 @@
 
 (interface (roll $<Die $>Roll with disadvantage))
 
-(interface (roll $<Num $<Dice $>Total))
-
-(interface (roll $<Num $<Dice plus $<Adds $>Total))
-
-(interface (roll $<Num $<Dice minus $<Penalty $>Total))
-
 (interface (roll two $<Dice $>First $>Second))
 
 (interface (roll two $<Dice $>Total DARO))   %% doubles add and roll over (T&T)
@@ -38,6 +32,12 @@
 (interface (roll $<Dice min mid max $>Min $>Mid $>Max))
 
 (interface (roll $<First $<Second $<Third min mid max $>Min $>Mid $>Max))
+
+(interface (roll $<Num $<Dice $>Total))
+
+(interface (roll $<Num $<Dice plus $<Adds $>Total))
+
+(interface (roll $<Num $<Dice minus $<Penalty $>Total))
 
 (interface (percentage of $<Number into $>Result))
 

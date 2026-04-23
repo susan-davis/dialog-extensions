@@ -5,6 +5,8 @@
 	  #reset-randomness
 	  #1d3
 	  #one-roll
+	  #1d6-plus-3
+	  #1d6-minus-3
 	  #wrap-around-1d6
 	  #two-roll-individual
 	  #two-roll-total
@@ -25,6 +27,8 @@
 	  #2d6-daro
 	  #3d6-taro
 	  #d6xd6
+	  #d6xd6-bonus
+	  #d6xd6-penalty
 	  #min-mid-max
 	  #mixed-min-mid-max
 	  #d8
@@ -74,6 +78,22 @@
 	(roll #d6 6)
 	(roll #d6 5)
 	~(3d6 has rolled over)
+
+(test #1d6-plus-3)
+	(roll #d6 plus 3 9)
+	(roll #d6 plus 3 4)
+	(roll #d6 plus 3 9)
+	(roll #d6 plus 3 9)
+	(roll #d6 plus 3 9)
+	(roll #d6 plus 3 8)
+
+(test #1d6-minus-3)
+	(roll #d6 minus 3 3)
+	(roll #d6 minus 3 0)
+	(roll #d6 minus 3 3)
+	(roll #d6 minus 3 3)
+	(roll #d6 minus 3 3)
+	(roll #d6 minus 3 2)
 
 (test #wrap-around-1d6)
  	(now) (3d6 list position 215)
@@ -269,6 +289,20 @@
 	(roll #d6 times #d6 4)
 	(roll #d6 times #d6 5)
 	(roll #d6 times #d6 18)
+
+(test #d6xd6-bonus)
+	(roll #d6 times #d6 adding 2 18)
+	(roll #d6 times #d6 adding 2 48)
+	(roll #d6 times #d6 adding 2 42)
+	(roll #d6 times #d6 adding 2 36)
+	(roll #d6 times #d6 adding 2 3)
+
+(test #d6xd6-penalty)
+	(roll #d6 times #d6 subtracting 2 6)
+	(roll #d6 times #d6 subtracting 2 24)
+	(roll #d6 times #d6 subtracting 2 18)
+	(roll #d6 times #d6 subtracting 2 12)
+	(roll #d6 times #d6 subtracting 2 1)
 
 (test #min-mid-max)
 	(roll #d6 min mid max 4 5 6)

@@ -39,8 +39,15 @@
 	  #7-die-pool-against-target
 	  #8-die-pool-against-target
 	  #9-die-pool-against-target
-	  #zero-percent
-	  #one-percent
+	  #percent-of-zero
+	  #percent-of-one
+	  #percent-of-two
+	  #percent-of-five
+	  #percent-of-14
+	  #percent-of-75
+	  #percent-of-150
+	  #percent-of-924
+	  #percent-of-16234
 	  ])
 
 %%-----------------------------------------------------------------------------
@@ -361,8 +368,50 @@
 	(roll 9 #d6 with target 5 into 3)
 	(roll 9 #d6 with target 5 into 1)
 
-(test #zero-percent)
+(test #percent-of-zero)
 	(percentage of 0 into 0)
 
-(test #one-percent)
+(test #percent-of-one)
 	(percentage of 1 into 1)
+
+(test #percent-of-two)
+	(percentage of 2 into 2)
+	(percentage of 2 into 1)
+	(percentage of 2 into 2)
+	(percentage of 2 into 1)
+
+(test #percent-of-five)
+	(percentage of 5 into 1)
+	(percentage of 5 into 5)
+	(percentage of 5 into 4)
+	(percentage of 5 into 1)
+
+(test #percent-of-14)
+	(percentage of 14 into 13)
+	(percentage of 14 into 9)
+	(percentage of 14 into 12)
+	(percentage of 14 into 4)
+
+(test #percent-of-75)
+	(percentage of 75 into 69)
+	(percentage of 75 into 61)
+	(percentage of 75 into 12)
+	(percentage of 75 into 75)
+
+(test #percent-of-150)
+	(percentage of 150 into 138)
+	(percentage of 150 into 121)
+	(percentage of 150 into 24)
+	(percentage of 150 into 149)
+
+(test #percent-of-924)
+	(percentage of 924 into 593)
+	(percentage of 924 into 656)
+	(percentage of 924 into 632)
+	(percentage of 924 into 829)
+
+(test #percent-of-16234)
+	(percentage of 16234 into 10363)
+	(percentage of 16234 into 12180)
+	(percentage of 16234 into 1805)
+	(percentage of 16234 into 8116)

@@ -1,17 +1,15 @@
 %% dgdebug -u dice-lite-tests.dg dice-lite.dg unit.dg stdlib.dg
 
 (list of tests [
-	#1d3
+	#d3
 	#d4
-	#one-die
-	#two-dice
-	#three-dice
+	#d6
 	#d8
-	#1d10
-	#2d10
+	#d10
 	#d12
 	#d20
 	#d36
+	#d72
 	#d100
 	#d216
     ])
@@ -20,155 +18,55 @@
 
 %%-----------------------------------------------------------------------------
 
-(1d3 $N times)
-	(if) ($N > 0) (then)
-		(1d3 $Roll)
-		($Roll > 0) ($Roll < 7)
-		($N minus 1 into $NMinusOne)
-		(1d3 $NMinusOne times)
-	(endif)
+($ 0 times with max $) %% do nothing
 
-(test #1d3)
-	(1d3 1000 times)
+($Dice $N times with max $Max)
+	(log) {$Dice $N times with max $Max}
+	(roll $Dice $Roll)
+	($Roll > 0) ~($Roll > $Max)
+	($N minus 1 into $NMinusOne)
+	($Dice $NMinusOne times with max $Max)
 
-(d4 $N times)
-	(if) ($N > 0) (then)
-		(d4 $Roll)
-		($Roll > 0) ($Roll < 5)
-		($N minus 1 into $NMinusOne)
-		(d4 $NMinusOne times)
-	(endif)
+#d3
+(test *)
+	(* 1000 times with max 3)
 
-(test #d4)
-	(d4 1000 times)
+#d4
+(test *)
+	(* 1000 times with max 4)
 
-(1d6 $N times)
-	(if) ($N > 0) (then)
-		(1d6 $Roll)
-		($Roll > 0) ($Roll < 7)
-		($N minus 1 into $NMinusOne)
-		(1d6 $NMinusOne times)
-	(endif)
+#d6
+(test *)
+	(* 1000 times with max 6)
 
-(test #one-die)
-	(1d6 1000 times)
+#d8
+(test *)
+	(* 1000 times with max 8)
 
-(2d6 $N times)
-	(if) ($N > 0) (then)
-		(2d6 $Roll)
-		($Roll > 1) ($Roll < 13)
-		(2d6 $A $B)
-		($A > 0) ($A < 7)
-		($B > 0) ($B < 7)
-		($N minus 1 into $NMinusOne)
-		(2d6 $NMinusOne times)
-	(endif)
+#d10
+(test *)
+	(* 1000 times with max 10)
 
-(test #two-dice)
-	(2d6 1000 times)
+#d12
+(test *)
+	(* 1000 times with max 12)
 
-(3d6 $N times)
-	(if) ($N > 0) (then)
-		(3d6 $Roll)
-		($Roll > 2) ($Roll < 19)
-		(3d6 $A $B $C)
-		($A > 0) ($A < 7)
-		($B > 0) ($B < 7)
-		($C > 0) ($C < 7)
-		($N minus 1 into $NMinusOne)
-		(3d6 $NMinusOne times)
-	(endif)
+#d20
+(test *)
+	(* 1000 times with max 20)
 
-(test #three-dice)
-	(3d6 1000 times)
+#d36
+(test *)
+	(* 1000 times with max 36)
 
-(d8 $N times)
-	(if) ($N > 0) (then)
-		(d8 $Roll)
-		($Roll > 0) ($Roll < 9)
-		($N minus 1 into $NMinusOne)
-		(d8 $NMinusOne times)
-	(endif)
+#d72
+(test *)
+	(* 1000 times with max 72)
 
-(test #d8)
-	(d8 1000 times)
+#d100
+(test *)
+	(* 1000 times with max 100)
 
-(1d10 $N times)
-	(if) ($N > 0) (then)
-		(1d10 $Roll)
-		($Roll > 0) ($Roll < 11)
-		($N minus 1 into $NMinusOne)
-		(1d10 $NMinusOne times)
-	(endif)
-
-(test #1d10)
-	(1d10 1000 times)
-
-(2d10 $N times)
-	(if) ($N > 0) (then)
-		(2d10 $Roll)
-		($Roll > 1) ($Roll < 21)
-		(2d10 $A $B)
-		($A > 0) ($A < 11)
-		($B > 0) ($B < 11)
-		($N minus 1 into $NMinusOne)
-		(2d10 $NMinusOne times)
-	(endif)
-
-(test #2d10)
-	(2d10 1000 times)
-
-(d12 $N times)
-	(if) ($N > 0) (then)
-		(d12 $Roll)
-		($Roll > 0) ($Roll < 13)
-		($N minus 1 into $NMinusOne)
-		(d12 $NMinusOne times)
-	(endif)
-
-(test #d12)
-	(d12 1000 times)
-
-(d20 $N times)
-	(if) ($N > 0) (then)
-		(d20 $Roll)
-		($Roll > 0) ($Roll < 21)
-		($N minus 1 into $NMinusOne)
-		(d20 $NMinusOne times)
-	(endif)
-
-(test #d20)
-	(d20 1000 times)
-
-(d36 $N times)
-	(if) ($N > 0) (then)
-		(d36 $Roll)
-		($Roll > 0) ($Roll < 37)
-		($N minus 1 into $NMinusOne)
-		(d36 $NMinusOne times)
-	(endif)
-
-(test #d36)
-	(d36 1000 times)
-
-(d100 $N times)
-	(if) ($N > 0) (then)
-		(d100 $Roll)
-		($Roll > 0) ($Roll < 101)
-		($N minus 1 into $NMinusOne)
-		(d100 $NMinusOne times)
-	(endif)
-
-(test #d100)
-	(d100 1000 times)
-
-(d216 $N times)
-	(if) ($N > 0) (then)
-		(d216 $Roll)
-		($Roll > 0) ($Roll < 217)
-		($N minus 1 into $NMinusOne)
-		(d216 $NMinusOne times)
-	(endif)
-
-(test #d216)
-	(d216 1000 times)
+#d216
+(test *)
+	(* 1000 times with max 216)

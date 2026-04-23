@@ -21,7 +21,6 @@
 ($ 0 times with max $) %% do nothing
 
 ($Dice $N times with max $Max)
-	(log) {$Dice $N times with max $Max}
 	(roll $Dice $Roll)
 	($Roll > 0) ~($Roll > $Max)
 	($N minus 1 into $NMinusOne)

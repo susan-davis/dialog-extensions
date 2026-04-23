@@ -227,9 +227,11 @@
 	(3d6 list position $Pos)
 	(assert $Pos > 0)
 	(assert $Pos < 217)
-	(assert $Pos > 0)
-	(assert $Pos < 217)
 	$Pos
+	(d20 list position $Pos20)
+	(assert $Pos20 > 0)
+	(assert $Pos20 < 201)
+	$Pos20
 
 (test #reset-randomness)
 	(roll three #d6 4 5 6)

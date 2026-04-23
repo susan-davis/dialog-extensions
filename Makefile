@@ -3,7 +3,7 @@ all: test
 DEBUG=dgdebug -u
 STDLIB=unit.dg stdlib.dg
 
-test: utils time dice dice-lite grid
+test: utils time dice dice-lite d6 grid
 
 utils:
 	$(DEBUG) utils-tests.dg utils.dg $(STDLIB)
@@ -17,8 +17,11 @@ dice:
 dice-lite:
 	$(DEBUG) dice-lite-tests.dg dice-lite.dg utils.dg $(STDLIB)
 
-dice-extra:
-	$(DEBUG) dice-lite-tests.dg dice.dg utils.dg $(STDLIB)
+d6:
+	$(DEBUG) d6-tests.dg d6.dg utils.dg $(STDLIB)
+
+d6-lite:
+	$(DEBUG) d6-lite-tests.dg d6-lite.dg utils.dg $(STDLIB)
 
 grid:
 	$(DEBUG) grid-tests.dg grid.dg utils.dg $(STDLIB)

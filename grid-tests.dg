@@ -769,8 +769,7 @@
 
 (test #turn-about)
 	(turn #test-ship about)
-	(#test-ship heading $A)
-	%%(assert $A = 135)
+	(#test-ship heading 135)
 
 (test #turn-away-from-near)
 	(turn #test-ship away from #near-target)

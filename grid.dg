@@ -271,7 +271,7 @@
 
 (closest unoccupied square to $Place from $Origin into $Result)
 	(fully bound $Place) (fully bound $Origin)
-	(if) ~(object at $Place into $Obj) (or) ($Place = $Origin) (then)
+	(if) ~(object at $Place into $) (or) ($Place = $Origin) (then)
 		($Result = $Place)
 	(else)
 		(calculate bearing from $Place to $Origin into $Bearing)

@@ -43,6 +43,8 @@
 
 (interface (percentage of $<Number into $>Result))
 
+(interface (random element from $<List into $>Result))
+
 %% d6xd6-style rolls, including bonuses and penalties
 
 (interface (roll $<Die1 times $<Die2 $>Total))
@@ -591,3 +593,9 @@
 		(percentage of $Mod into $Remainder)
 		($Product plus $Remainder into $Percentage)
 	(endif)
+
+%% This used to live in utils.dg, but we don't want to couple dice.dg to it.
+(random element from $List into $Choice)
+	(length of $List into $Length)
+	(percentage of $Length into $Percent)
+	(nth $List $Percent $Choice)

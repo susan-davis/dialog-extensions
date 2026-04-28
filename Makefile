@@ -1,4 +1,6 @@
-all: test 
+all: test
+
+COMPILE=dialogc -t z5
 
 DEBUG=dgdebug -u
 STDLIB=unit.dg stdlib.dg
@@ -28,6 +30,6 @@ grid:
 	$(DEBUG) grid-tests.dg grid.dg utils.dg $(STDLIB)
 
 clean:
-	rm -f *~ \#*\# *.z8 *.zblorb *.aastory *.d64 *.d71
+	rm -f *~ \#*\# *.z5 *.z8 *.zblorb *.aastory *.d64 *.d71
 
 .PHONY: test all clean utils time dice dice-lite dice-extra

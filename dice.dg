@@ -246,10 +246,6 @@
 	(d20 choice $Num)
 	(split $Num into $Roll $ $ $)
 
-(roll 2 * $Total)
-	(roll two * $First $Second)
-	($First plus $Second into $Total)
-
 (roll two * $First $Second)
 	(roll #d100 $Roll)
 	(split $Roll into $ $ $First $Second)

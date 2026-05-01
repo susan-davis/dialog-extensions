@@ -1,7 +1,7 @@
 # dialog-extensions
 Useful extensions for the Dialog domain-specific Interactive Fiction language. These are mostly code-oriented, rather than player-facing, and can be quietly dropped in behind the scenes to simplify your code. Unit tests are provided for all of them, in the corresponding file ending in `-tests.dg`; running `make test` will run them all.
 
-These extensions are written for Dialog 1a/01 and later, and aren't guaranteed to work out-of-the-box on 0m/03 or earlier.
+These extensions are written for Dialog 1a/01 and later, and aren't guaranteed to work out-of-the-box on 0m/03 or earlier, though they were first developed on 0m/03.
 
 ## Modules
 

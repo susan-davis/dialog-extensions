@@ -1,7 +1,7 @@
 %% dice.dg
 %% include utils.dg when compiling or debugging
 
-(extension version)	Undo-safe die rolls v0.6 by Susan Davis (line)
+(extension version)	Undo-safe die rolls v0.2 by Susan Davis (line)
 
 %%-------------------------------- INTERFACES ---------------------------------
 

@@ -14,6 +14,9 @@ utils:
 time:
 	$(DEBUG) time-tests.dg time.dg $(STDLIB)
 
+duration:
+	$(DEBUG) duration-tests.dg duration.dg time.dg $(STDLIB)
+
 dice:
 	$(DEBUG) dice-tests.dg dice.dg utils.dg $(STDLIB)
 

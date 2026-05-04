@@ -7,8 +7,30 @@
 (list of tests [
 	#hours-minutes
 	#hours-minutes-assert
-	#hours-minutes-zero
-	#hours-minutes-after-midnight
+	#1969-is-not-a-leap-year
+	#1980-is-a-leap-year
+	#2000-is-a-leap-year
+	#2100-is-not-a-leap-year
+	#2400-is-a-leap-year
+	#jan-1969-has-31
+	#feb-1969-has-28
+	#feb-1980-has-29
+	#feb-2000-has-29
+	#feb-2100-has-28
+	#feb-2400-has-29
+	#length-of-1969-is-365
+	#length-of-1980-is-366
+	#length-of-2000-is-366
+	#length-of-2100-is-365
+	#length-of-2400-is-366
+	#12-is-jan-12-1969
+	#55-is-feb-24-1966
+	#83-is-mar-24-1999
+	#84-is-mar-24-2000
+	#365-is-dec-31-1999
+	#366-is-dec-31-2000
+	#367-is-invalid
+	#366-of-non-leap-year-is-invalid
 	#tick-tock
 	#leading-zero-zero
 	#leading-zero-one
@@ -53,17 +75,11 @@
 	#restart-time
 	])
 
-(current time 891)
+(current datetime [891 12 1969])
 
-(current date [12 1 1969])
+(january starts on 3) %% Wednesday
 
-(month starts on 3) %% Wednesday
-
-($H hours $M minutes)
-	(current time $Time)
-	($H hours $M minutes for $Time)
-
-(clean up $)	(set time [891 12 1 1969])
+(clean up $)	(set time [891 12 1969])
 		  		(now) (using north american dates)
 				(now) (time is running)
 				(now) ~(suspend next tick)
@@ -86,14 +102,77 @@
 (test #hours-minutes)
 	(14 hours 51 minutes)
 
-(test #hours-minutes-zero)
-	(now) (current time 0)
-	(0 hours 0 minutes)
-	~(14 hours 51 minutes)
+(test #1969-is-not-a-leap-year)
+	~(1969 is a leap year)
 
-(test #hours-minutes-after-midnight)
-	(now) (current time 1441)
-	(24 hours 1 minutes)
+(test #1980-is-a-leap-year)
+	(1980 is a leap year)
+
+(test #2000-is-a-leap-year)
+	(2000 is a leap year)
+
+(test #2100-is-not-a-leap-year)
+	~(2100 is a leap year)
+
+(test #2400-is-a-leap-year)
+	(2400 is a leap year)
+
+(test #jan-1969-has-31)
+	(days in 1 into 31 for 1969)
+
+(test #feb-1969-has-28)
+	(days in 2 into 28 for 1969)
+
+(test #feb-1980-has-29)
+	(days in 2 into 29 for 1980)
+
+(test #feb-2000-has-29)
+	(days in 2 into 29 for 2000)
+
+(test #feb-2100-has-28)
+	(days in 2 into 28 for 2100)
+
+(test #feb-2400-has-29)
+	(days in 2 into 29 for 2400)
+
+(test #length-of-1969-is-365)
+	(length of year 1969 into 365)
+
+(test #length-of-1980-is-366)
+	(length of year 1980 into 366)
+
+(test #length-of-2000-is-366)
+	(length of year 2000 into 366)
+
+(test #length-of-2100-is-365)
+	(length of year 2100 into 365)
+
+(test #length-of-2400-is-366)
+	(length of year 2400 into 366)
+
+(test #12-is-jan-12-1969)
+	(day 12 of 1969 is 1 12)
+
+(test #55-is-feb-24-1966)
+	(day 55 of 1966 is 2 24)
+
+(test #83-is-mar-24-1999)
+	(day 83 of 1999 is 3 24)
+
+(test #84-is-mar-24-2000)
+	(day 84 of 2000 is 3 24)
+
+(test #365-is-dec-31-1999)
+	(day 365 of 1999 is 12 31)
+
+(test #366-is-dec-31-2000)
+	(day 366 of 2000 is 12 31)
+
+(test #367-is-invalid)
+	~(day 367 of 2028 is $ $)
+
+(test #366-of-non-leap-year-is-invalid)
+	~(day 366 of 1999 is $ $)
 
 (test #leading-zero-zero)
 	(collect words) (leading zero 0) (into [0 0])
@@ -111,45 +190,38 @@
 	(collect words) (clock time) (into [2 : 51 pm])
 
 (test #clock-time-midnight)
-	(now) (current time 0)
-	(collect words) (clock time) (into [12 : 0 0 am])
+	(collect words) (clock time for 0) (into [12 : 0 0 am])
 
 (test #clock-time-noon)
-	(now) (current time 720)
-	(collect words) (clock time) (into [12 : 0 0 pm])
+	(collect words) (clock time for 720) (into [12 : 0 0 pm])
 
 (test #clock-time-morning)
-	(now) (current time 390)
-	(collect words) (clock time) (into [6 : 30 am])
+	(collect words) (clock time for 390) (into [6 : 30 am])
 
 (test #clock-time-afternoon)
-	(now) (current time 980)
-	(collect words) (clock time) (into [4 : 20 pm])
+	(collect words) (clock time for 980) (into [4 : 20 pm])
 
 (test #military-time)
+	(military time)
 	(collect words) (military time) (into [14 : 51])
 
 (test #military-time-midnight)
-	(now) (current time 0)
-	(collect words) (military time) (into [0 0 : 0 0])
+	(collect words) (military time for 0) (into [0 0 : 0 0])
 
 (test #military-time-noon)
-	(now) (current time 720)
-	(collect words) (military time) (into [12 : 0 0])
+	(collect words) (military time for 720) (into [12 : 0 0])
 
 (test #military-time-morning)
-	(now) (current time 390)
-	(collect words) (military time) (into [0 6 : 30])
+	(collect words) (military time for 390) (into [0 6 : 30])
 
 (test #military-time-afternoon)
-	(now) (current time 980)
-	(collect words) (military time) (into [16 : 20])
+	(collect words) (military time for 980) (into [16 : 20])
 
 (test #nato-time)
 	(collect words) (nato time) (into [12 14 51 Z jan 69])
 
 (test #nato-time-union)
-	(set time [750 5 3 2273])
+	(set time [750 64 2273])
 	(collect words) (nato time) (into [0 5 12 30 Z mar 73])
 
 (test #short-date)
@@ -174,9 +246,12 @@
 	(collect words) (full date with weekday) (into [Sunday , 12 January , 1969])
 
 (test #set-time)
-	(set time [430 13 1 1969])
+	(set time [430 12 1969])
 	(7 hours 10 minutes)
-	(current date [13 1 1969])
+
+(test #set-time-only)
+	(set time 7 10)
+	(7 hours 10 minutes)
 
 (test #elapse-0-minutes)
 	(elapse 0 minutes)
@@ -200,12 +275,10 @@
 
 (test #elapse-past-midnight)
 	(elapse 1339 minutes)
-	(current date [13 1 1969])
 	(13 hours 10 minutes)
 
 (test #elapse-multiple-days)
 	(elapse 4320 minutes)
-	(current date [15 1 1969])
 	(14 hours 51 minutes)
 
 (test #elapse-4-hours)
@@ -214,38 +287,35 @@
 
 (test #elapse-23-hours)
 	(elapse 23 hours)
-	(current date [13 1 1969])
 	(13 hours 51 minutes)
 
 (test #elapse-25-hours)
 	(elapse 25 hours)
-	(current date [13 1 1969])
 	(15 hours 51 minutes)
 
 (test #elapse-0-days)
 	(elapse 0 days)
-	(current date [12 1 1969])
 	(14 hours 51 minutes)
 
 (test #elapse-3-days)
 	(elapse 3 days)
-	(current date [15 1 1969])
 	(14 hours 51 minutes)
+	(current datetime [891 15 1969])
 
 (test #elapse-11-days)
 	(elapse 11 days)
-	(current date [23 1 1969])
 	(14 hours 51 minutes)
+	(current datetime [891 23 1969])
 
 (test #elapse-12-days)
 	(elapse 12 days)
-	(current date [24 1 1969])
 	(14 hours 51 minutes)
+	(current datetime [891 24 1969])
 
 (test #elapse-23-days)
 	(elapse 23 days)
-	(current date [35 1 1969]) %% this is why there's a (normalize date) hook
 	(14 hours 51 minutes)
+	(current datetime [891 35 1969])
 
 (test #tick-tock)
 	(time is running)

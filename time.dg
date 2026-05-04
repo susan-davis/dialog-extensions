@@ -1,10 +1,10 @@
 %% time.dg
-%% Basic handling of time and date, provided here as an example of how to use
-%% unit.dg. Supports CE dates up to 16383 CE only; you'll want a bespoke
-%% civilization-specific extension for any game set in BCE, or anywhere not
-%% Western influenced, or in the very distant future.
+%% Handles time and date, provided here as an example of how to use unit.dg.
+%% Supports CE dates up to 16383 CE only; you'll want a bespoke civilization-
+%% specific extension for any game set in BCE, or anywhere not Western
+%% influenced, or in the very distant future.
 
-(extension version)	Time and date v0.2, by Susan Davis (line)
+(extension version)	Gregorian time and date v0.2, by Susan Davis (line)
 
 %%----------------------------------------------------------------------
 
@@ -53,10 +53,6 @@
 (interface (elapse $<Num months))
 
 (interface (elapse $<Num years))
-
-(interface (elapse $<Num centuries))
-
-(interface (elapse $<Num millennia)) %% only 16 available!
 
 %% negate to get D-M-Y dates
 (using north american dates)
@@ -125,6 +121,14 @@
 
 (day $Date of $Year is $Month $Day)
 	(1 $Date in $Year is really $Month $Day)
+
+(1 $Day is day $Day of $Y)
+
+($Month $Day is day $Date of $Year)
+	($Month minus 1 into $NewMonth)
+	(days in $NewMonth into $Days for $Year)
+	($Day plus $Days into $NewDay)
+	($NewMonth $NewDay is day $Date of $Year)
 
 %% Calculate the weekday for New Year's from first principles, for after a big
 %% time jump.
@@ -285,13 +289,28 @@
 	([$ $ $] = $Now)
 	(now) (current datetime $Now)
 
-(elapse $M millennia)
+(set time $Hour $Minute)
+	(current datetime [$ $Day $Year])
+	($Hour times 60 into $SixtyMinutes)
+	($SixtyMinutes plus $Minute into $Time)
+	(set time [$Time $Day $Year])
+
+(set date $Day $Month $Year)
+	(current datetime [$Time $ $])
+	($Month $Day is day $Date for $Year)
+	(set time [$Time $Date $Year])
+
+(elapse $Y years)
 	(current datetime [$Time $Day $Year])
-	($M times 1000 into $Years)
-	($Year plus $Years into $Future)
-	(now) (current datetime [$Time $Day $Future])
-	(january $Future starts with $Weekday)
-	(now) (january starts with $Weekday)
+	($Year plus $Y into $Future)
+	(set time [$Time $Day $Future])
+	(january $Future starts with $NewYears)
+	(now) (january starts with $NewYears)
+
+(elapse $M months)
+	($M divided by 12 into $Years)
+	(elapse $Years years)
+	($M modulo 12 into $Remaining)
 
 (elapse $W weeks)
 	($W times 7 into $Days)

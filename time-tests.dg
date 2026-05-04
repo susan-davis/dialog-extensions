@@ -31,6 +31,12 @@
 	#366-is-dec-31-2000
 	#367-is-invalid
 	#366-of-non-leap-year-is-invalid
+	#jan-12-1969-is-12
+	#feb-24-1966-is-55
+	#mar-24-1999-is-83
+	#mar-24-2000-is-84
+	#dec-31-1999-is-365
+	#dec-31-2000-is-366
 	#tick-tock
 	#leading-zero-zero
 	#leading-zero-one
@@ -173,6 +179,24 @@
 
 (test #366-of-non-leap-year-is-invalid)
 	~(day 366 of 1999 is $ $)
+
+(test #jan-12-1969-is-12)
+	(1 12 is day 12 of 1969)
+
+(test #feb-24-1966-is-55)
+	(2 24 is day 55 of 1966)
+
+(test #mar-24-1999-is-83)
+	(3 24 is day 83 of 1999)
+
+(test #mar-24-2000-is-84)
+	(3 24 is day 84 of 2000)
+
+(test #dec-31-1999-is-365)
+	(12 31 is day 365 of 1999)
+
+(test #dec-31-2000-is-366)
+	(12 31 is day 366 of 2000)
 
 (test #leading-zero-zero)
 	(collect words) (leading zero 0) (into [0 0])

@@ -1,0 +1,29 @@
+%% facing.dg
+%% Include grid.dg and utils.dg when compiling or debugging.
+
+%% A lightweight alternative to bearing.dg for vintage hardware. Include either
+%% this or bearing.dg, but not both.
+
+%%-------------------------------- INTERFACES --------------------------------
+
+($<GridObject facing $Facing)
+
+(interface (direction from $<Here to $<There into $>Direction))
+
+(interface (direction from $<Object to $<Target into $>Direction))
+
+(interface (relative direction from $<Object to $<Target into $>Direction))
+
+(interface (turn $<Object to facing $<Facing))
+
+(interface (turn $<Object to face position $<Position>))
+
+(interface (drag $<Object to position $<Position))
+
+(interface (drag $<Object $<Distance in direction $<Direction))
+
+(interface (move $<Object to position $<Position))
+
+(interface (move $<Object $<Distance in direction $<Direction))
+
+%%------------------------------ IMPLEMENTATION -------------------------------

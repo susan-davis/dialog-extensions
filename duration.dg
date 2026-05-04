@@ -1,0 +1,17 @@
+%% duration.dg
+%% Include time.dg when compiling or debugging.
+
+(extension version)		Duration v0.1 by Susan Davis (line)
+
+%% Copyright © 2021-2026, Susan Davis. All rights reserved. See LICENSE for
+%% licensing details.
+
+%%-------------------------------- INTERFACES --------------------------------
+
+(interface (duration from $<Time1 to $<Time2 into $>Duration))
+
+(interface (duration $<Duration))
+
+(interface (informal duration $<Duration))
+
+%%------------------------------ IMPLEMENTATION -------------------------------

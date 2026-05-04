@@ -46,7 +46,7 @@
 
 %% Positions and coordinates
 
-(interface (place $<Object at $<Position))
+(interface (place $<Object at $<Position)) %% teleport to another square
 
 (interface ($<GridObject is on the map))
 
@@ -70,12 +70,6 @@
 (interface (calculate range from $<Here to $<There into $>Range))
 
 (interface (range from $<Object to $<Target into $>Range))
-
-%% Basic movement
-
-(interface (move $<Object to square $<Position))
-
-(interface (move $<Object $<Num squares $<Direction))
 
 %% ------------------------------ STATE ------------------------------
 
@@ -288,11 +282,3 @@
 	($Object position $Here)
 	($Target position $There)
 	(calculate range from $Here to $There into $Range)
-
-%%--------------------------------- MOVEMENT ---------------------------------
-
-%% TODO: implement cardinal-only
-
-%%(move $Object to square $Position)
-
-%%(move $Object $Num squares $Direction)

@@ -122,7 +122,7 @@
 (day $Date of $Year is $Month $Day)
 	(1 $Date in $Year is really $Month $Day)
 
-(1 $Day is day $Day of $Y)
+(1 $Day is day $Day of $)
 
 ($Month $Day is day $Date of $Year)
 	($Month minus 1 into $NewMonth)
@@ -297,7 +297,7 @@
 
 (set date $Day $Month $Year)
 	(current datetime [$Time $ $])
-	($Month $Day is day $Date for $Year)
+	($Month $Day is day $Date of $Year)
 	(set time [$Time $Date $Year])
 
 (elapse $Y years)
@@ -308,9 +308,9 @@
 	(now) (january starts with $NewYears)
 
 (elapse $M months)
-	($M divided by 12 into $Years)
-	(elapse $Years years)
-	($M modulo 12 into $Remaining)
+%%	($M divided by 12 into $Years)
+%%	(elapse $Years years)
+%%	($M modulo 12 into $Remaining)
 
 (elapse $W weeks)
 	($W times 7 into $Days)

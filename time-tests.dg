@@ -37,6 +37,11 @@
 	#mar-24-2000-is-84
 	#dec-31-1999-is-365
 	#dec-31-2000-is-366
+	#january-1969-starts-with-wednesday
+	#january-1999-starts-with-friday
+	#january-1583-starts-with-tuesday
+	#january-1582-starts-with-monday
+	#january-1-starts-with-saturday
 	#tick-tock
 	#leading-zero-zero
 	#leading-zero-one
@@ -61,6 +66,8 @@
 	#full-date-weekday
 	#full-date-weekday-eu
 	#set-time
+	#set-time-only
+	#set-date
 	#elapse-0-minutes
 	#elapse-8-minutes
 	#elapse-9-minutes
@@ -198,6 +205,16 @@
 (test #dec-31-2000-is-366)
 	(12 31 is day 366 of 2000)
 
+(test #january-1969-starts-with-wednesday)
+
+(test #january-1999-starts-with-friday)
+
+(test #january-1583-starts-with-tuesday)
+
+(test #january-1582-starts-with-monday)
+
+(test #january-1-starts-with-saturday)
+
 (test #leading-zero-zero)
 	(collect words) (leading zero 0) (into [0 0])
 
@@ -276,6 +293,11 @@
 (test #set-time-only)
 	(set time 7 10)
 	(7 hours 10 minutes)
+	(current datetime [430 12 1969])
+
+(test #set-date)
+	(set date 24 3 2000)
+	(current datetime [891 84 2000])
 
 (test #elapse-0-minutes)
 	(elapse 0 minutes)

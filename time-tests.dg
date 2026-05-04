@@ -80,14 +80,25 @@
 	#elapse-360-minutes
 	#elapse-past-midnight
 	#elapse-multiple-days
+	#elapse-16383-minutes
+	#elapse-0-hours
 	#elapse-4-hours
 	#elapse-23-hours
 	#elapse-25-hours
+	#elapse-16383-hours
 	#elapse-0-days
 	#elapse-3-days
 	#elapse-11-days
 	#elapse-12-days
 	#elapse-23-days
+	#elapse-16017-days
+	#dont-elapse-16383-days
+	#elapse-0-years
+	#elapse-2-years
+	#elapse-200-years
+	#elapse-2000-years
+	#elapse-14414-years
+	#dont-elapse-16383-years
 	#suspend-tick
 	#stop-time
 	#restart-time
@@ -211,31 +222,31 @@
 	(12 31 is day 366 of 2000)
 
 (test #january-1801-starts-with-thursday)
-	(january 1801 starts with 4)
+	(january 1801 starts on 4)
 
 (test #january-1901-starts-with-tuesday)
-	(january 1901 starts with 2)
+	(january 1901 starts on 2)
 
 (test #january-2001-starts-with-monday)
-	(january 2001 starts with 1)
+	(january 2001 starts on 1)
 
 (test #january-2101-starts-with-saturday)
-	(january 2101 starts with 6)
+	(january 2101 starts on 6)
 
 (test #january-2201-starts-with-thursday)
-	(january 2201 starts with 4)
+	(january 2201 starts on 4)
 
 (test #january-2301-starts-with-tuesday)
-	(january 2301 starts with 2)
+	(january 2301 starts on 2)
 
 (test #january-1969-starts-with-wednesday)
-	(january 1969 starts with 3)
+	(january 1969 starts on 3)
 
 (test #january-1999-starts-with-friday)
-	(january 1999 starts with 5)
+	(january 1999 starts on 5)
 
 (test #january-1753-starts-with-monday)
-	(january 1753 starts with 1)
+	(january 1753 starts on 1)
 
 (test #leading-zero-zero)
 	(collect words) (leading zero 0) (into [0 0])
@@ -265,7 +276,6 @@
 	(collect words) (clock time for 980) (into [4 : 20 pm])
 
 (test #military-time)
-	(military time)
 	(collect words) (military time) (into [14 : 51])
 
 (test #military-time-midnight)
@@ -310,7 +320,7 @@
 
 (test #full-date-union)
 	(set time [750 64 2273])
-	(collect words) (full date with weekday) (into $W) $W
+	(collect words) (full date with weekday) (into [Wednesday , March 5 , 2273])
 
 (test #set-time)
 	(set time [430 12 1969])
@@ -353,41 +363,83 @@
 	(elapse 4320 minutes)
 	(14 hours 51 minutes)
 
+(test #elapse-16383-minutes)
+	(elapse 16383 minutes)
+	(current datetime [1434 23 1969])
+
+(test #elapse-0-hours)
+	(elapse 0 hours)
+	(14 hours 51 minutes)
+
 (test #elapse-4-hours)
 	(elapse 4 hours)
 	(18 hours 51 minutes)
 
 (test #elapse-23-hours)
 	(elapse 23 hours)
-	(13 hours 51 minutes)
+	(current datetime [831 13 1969])
 
 (test #elapse-25-hours)
 	(elapse 25 hours)
-	(15 hours 51 minutes)
+	(current datetime [951 13 1969])
+
+(test #elapse-16383-hours)
+	(elapse 16383 hours)
+	(current datetime [351 330 1970])
 
 (test #elapse-0-days)
 	(elapse 0 days)
-	(14 hours 51 minutes)
+	(current datetime [891 12 1969])
 
 (test #elapse-3-days)
 	(elapse 3 days)
-	(14 hours 51 minutes)
 	(current datetime [891 15 1969])
 
 (test #elapse-11-days)
 	(elapse 11 days)
-	(14 hours 51 minutes)
 	(current datetime [891 23 1969])
 
 (test #elapse-12-days)
 	(elapse 12 days)
-	(14 hours 51 minutes)
 	(current datetime [891 24 1969])
 
 (test #elapse-23-days)
 	(elapse 23 days)
-	(14 hours 51 minutes)
 	(current datetime [891 35 1969])
+
+(test #elapse-365-days)
+	(elapse 365 days)
+	(current datetime [891 12 1970])
+
+(test #elapse-16017-days)
+	(elapse 16017 days)
+	(current datetime [891 324 2012])
+
+(test #dont-elapse-16383-days)
+	~(elapse 16383 days)
+
+(test #elapse-0-years)
+	(elapse 0 years)
+	(current datetime [891 12 1969])
+
+(test #elapse-2-years)
+	(elapse 2 years)
+	(current datetime [891 12 1971])
+
+(test #elapse-200-years)
+	(elapse 200 years)
+	(current datetime [891 12 2169])
+
+(test #elapse-2000-years)
+	(elapse 2000 years)
+	(current datetime [891 12 3969])
+
+(test #elapse-14414-years)
+	(elapse 14414 years)
+	(current datetime [891 12 16383])
+
+(test #dont-elapse-16383-years)
+	~(elapse 16383 years)
 
 (test #tick-tock)
 	(time is running)

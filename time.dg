@@ -1,12 +1,11 @@
 %% time.dg
 %% Handles time and date, provided here as an example of how to use unit.dg.
-%% Supports CE dates from 1753 to 16383 CE only, or from as early as 1583 in
-%% countries that switched calendars before the British did. You'll want a
-%% bespoke civilization-specific extension for any game set in BCE, or anywhere
-%% not Western influenced, or in the very distant future. We also assume that
-%% January 1 is the start of the new year, which wasn't true everywhere until
-%% 1918; again, you'll need to hack this to support games set in locales for
-%% which New Year's was still on March 25.
+
+%% Supports Gregorian CE dates from 1753 to 16383 CE only, or from as early as
+%% 1583 in countries that switched calendars before the British did. We also
+%% assume that January 1 is the start of the new year, which wasn't true
+%% everywhere until 1918; again, you'll need to hack this to support games set
+%% in locales for which New Year's was still on March 25.
 
 (extension version)	Gregorian time and date v0.2, by Susan Davis (line)
 
@@ -14,7 +13,7 @@
 
 (global variable (current datetime $)) %% [time day-of-year year]
 
-(global variable (january starts on $)) %% day of week of New Year's day
+(global variable (january starts on $)) %% day of week on New Year's day
 
 (interface (set time $<Time))
 
@@ -52,7 +51,7 @@
 
 (interface (elapse $<Num days))
 
-(interface (elapse $<Num weeks))
+(interface (elapse $<Num months))
 
 (interface (elapse $<Num years))
 
@@ -135,7 +134,7 @@
 %% Calculate the weekday for New Year's from first principles, for after a big
 %% time jump.
 
-(january $Year starts with $Weekday)
+(january $Year starts on $Weekday)
 	($Year modulo 400 into $CycleYear)
 	($CycleYear divided by 100 into $Centuries)
 	($Centuries times 5 into $CenturyDays) %% 100+(25-1) mod 7 = 5
@@ -277,9 +276,35 @@
 	(current datetime $Now)
 	(nato time for $Now)
 
-(set time $Now)
-	([$ $ $] = $Now)
+(normalize $Timestamp into $NewTimestamp)
+	([$Time $Date $Year] = $Timestamp)
+	(if) ($Time > 1440) (then)
+		($Time divided by 1440 into $Days)
+		($Time modulo 1440 into $NewTime)
+		($Date plus $Days into $ProposedDate)
+    (else)
+		($NewTime = $Time)
+		($NewDate = $Date)
+	(endif)
+	(length of year $Year into $Length)
+	(if) ($NewDate > $Length) (then)
+		($NewDate minus $Length into $NewDateMinusLength)
+		($Year plus 1 into $NewYear)
+		(normalize [$NewTime $NewDateMinusLength $NewYear] into $NewTimestamp)
+	(else)
+		($NewTimestamp = [$NewTime $NewDate $Year])
+	(endif)
+
+(set time $Timestamp)
+	(current datetime $Then)
+	([$ $ $OldYear] = $Then)
+	(normalize $Timestamp into $Now)
 	(now) (current datetime $Now)
+	([$ $ $NewYear] = $Now)
+	(if) ~($OldYear = $NewYear) (then)
+		(january $NewYear starts on $Weekday)
+		(now) (january starts on $Weekday)
+	(endif)
 
 (set time $Hour $Minute)
 	(current datetime [$ $Day $Year])
@@ -294,31 +319,22 @@
 
 (elapse $Y years)
 	(current datetime [$Time $Day $Year])
+	(16383 minus $Year into $Max)
+	~($Y > $Max)
 	($Year plus $Y into $Future)
 	(set time [$Time $Day $Future])
-	(january $Future starts with $NewYears)
-	(now) (january starts with $NewYears)
-
-(elapse $W weeks)
-	($W times 7 into $Days)
-	(elapse $Days days)
 
 (elapse $D days)
-	(if) ($D > 11) (then)
-		($Days = 11)
-		($D minus 11 into $Additional)
-	(else)
-		($Days = $D)
-		($Additional = 0)
-	(endif)
-	($Days times 1440 into $Minutes)
-	(elapse $Minutes minutes)
-	(if) ($Additional > 0) (then)
-		(elapse $Additional days)
-	(endif)
+	($D < 16018) %% maximum before arithmetic overflow
+	(current datetime [$Time $Now $Year])
+	($Now plus $D into $Day)
+	(set time [$Time $Day $Year])
 
 (elapse $H hours)
-	($H times 60 into $Minutes)
+	($H divided by 24 into $Days)
+	(elapse $Days days)
+	($H modulo 24 into $Hours)
+	($Hours times 60 into $Minutes)
 	(elapse $Minutes minutes)
 
 (elapse $Num minutes)
@@ -338,14 +354,6 @@
 	(if) ($ND > $Length) (then)
 		($Y plus 1 into $Year)
 		($ND modulo $Length into $Day)
-		(january begins with $OldYear)
-		($OldYear plus 1 into $NY) %% 52 weeks = 364 days
-		(if) ($Year is a leap year) (then)
-			($NY plus 1 into $NewYear)
-		(else)
-			($NY = $NewYear)
-		(endif)
-		(now) (january begins with $NewYear)
 	(else)
 		($Y = $Year)
 		($ND = $Day)

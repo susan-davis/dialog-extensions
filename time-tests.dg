@@ -37,11 +37,15 @@
 	#mar-24-2000-is-84
 	#dec-31-1999-is-365
 	#dec-31-2000-is-366
+	#january-1801-starts-with-thursday
+	#january-1901-starts-with-tuesday
+	#january-2001-starts-with-monday
+	#january-2101-starts-with-saturday
+	#january-2201-starts-with-thursday
+	#january-2301-starts-with-tuesday
 	#january-1969-starts-with-wednesday
 	#january-1999-starts-with-friday
-	#january-1583-starts-with-tuesday
-	#january-1582-starts-with-monday
-	#january-1-starts-with-saturday
+	#january-1753-starts-with-monday
 	#tick-tock
 	#leading-zero-zero
 	#leading-zero-one
@@ -65,6 +69,7 @@
 	#full-date-eu
 	#full-date-weekday
 	#full-date-weekday-eu
+	#full-date-union
 	#set-time
 	#set-time-only
 	#set-date
@@ -205,15 +210,32 @@
 (test #dec-31-2000-is-366)
 	(12 31 is day 366 of 2000)
 
+(test #january-1801-starts-with-thursday)
+	(january 1801 starts with 4)
+
+(test #january-1901-starts-with-tuesday)
+	(january 1901 starts with 2)
+
+(test #january-2001-starts-with-monday)
+	(january 2001 starts with 1)
+
+(test #january-2101-starts-with-saturday)
+	(january 2101 starts with 6)
+
+(test #january-2201-starts-with-thursday)
+	(january 2201 starts with 4)
+
+(test #january-2301-starts-with-tuesday)
+	(january 2301 starts with 2)
+
 (test #january-1969-starts-with-wednesday)
+	(january 1969 starts with 3)
 
 (test #january-1999-starts-with-friday)
+	(january 1999 starts with 5)
 
-(test #january-1583-starts-with-tuesday)
-
-(test #january-1582-starts-with-monday)
-
-(test #january-1-starts-with-saturday)
+(test #january-1753-starts-with-monday)
+	(january 1753 starts with 1)
 
 (test #leading-zero-zero)
 	(collect words) (leading zero 0) (into [0 0])
@@ -285,6 +307,10 @@
 (test #full-date-weekday-eu)
 	(now) ~(using north american dates)
 	(collect words) (full date with weekday) (into [Sunday , 12 January , 1969])
+
+(test #full-date-union)
+	(set time [750 64 2273])
+	(collect words) (full date with weekday) (into $W) $W
 
 (test #set-time)
 	(set time [430 12 1969])

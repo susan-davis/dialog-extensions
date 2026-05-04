@@ -1,8 +1,12 @@
 %% time.dg
 %% Handles time and date, provided here as an example of how to use unit.dg.
-%% Supports CE dates up to 16383 CE only; you'll want a bespoke civilization-
-%% specific extension for any game set in BCE, or anywhere not Western
-%% influenced, or in the very distant future.
+%% Supports CE dates from 1753 to 16383 CE only, or from as early as 1583 in
+%% countries that switched calendars before the British did. You'll want a
+%% bespoke civilization-specific extension for any game set in BCE, or anywhere
+%% not Western influenced, or in the very distant future. We also assume that
+%% January 1 is the start of the new year, which wasn't true everywhere until
+%% 1918; again, you'll need to hack this to support games set in locales for
+%% which New Year's was still on March 25.
 
 (extension version)	Gregorian time and date v0.2, by Susan Davis (line)
 
@@ -49,8 +53,6 @@
 (interface (elapse $<Num days))
 
 (interface (elapse $<Num weeks))
-
-(interface (elapse $<Num months))
 
 (interface (elapse $<Num years))
 
@@ -133,25 +135,18 @@
 %% Calculate the weekday for New Year's from first principles, for after a big
 %% time jump.
 
-(calculate $Weekday for $Year from $FirstYear which started on $FirstWeekday)
-	($Year minus $FirstYear into $SincePreviousCycle)
-	($SincePreviousCycle modulo 400 into $SinceLastCycle)
-	($SinceLastCycle divided by 100 into $Centuries)
-	($Centuries times 6 into $CenturyDays)
-	($SinceLastCycle modulo 100 into $Remaining)
+(january $Year starts with $Weekday)
+	($Year modulo 400 into $CycleYear)
+	($CycleYear divided by 100 into $Centuries)
+	($Centuries times 5 into $CenturyDays) %% 100+(25-1) mod 7 = 5
+	($CycleYear modulo 100 into $Remaining)
 	($Remaining divided by 4 into $LeapYears)
-	($FirstWeekday plus $CenturyDays into $Sum1)
-	($Sum1 plus $LeapYears into $Sum2)
-	($Sum2 plus $Remaining into $RawWeekday)
-	($RawWeekday modulo 7 into $Weekday)
+	($Remaining plus $LeapYears into $RemainingDays)
+	($RemainingDays plus $CenturyDays into $TotalDays)
+	($TotalDays modulo 7 into $Weekday)
 
 (january $Year starts with $Weekday)
-	($Year > 1582)
-	(calculate $Weekday for $Year from 1201 which started on 1)
-
-(january $Year starts with $Weekday)
-	($Year < 1583)
-	(calculate $Weekday for $Year from 1 which started on 6)
+	(calculate $Weekday for $Year from 1601 which started on 1)
 
 (leading zero $Num)
 	(if) ($Num < 10) (then)
@@ -306,11 +301,6 @@
 	(set time [$Time $Day $Future])
 	(january $Future starts with $NewYears)
 	(now) (january starts with $NewYears)
-
-(elapse $M months)
-%%	($M divided by 12 into $Years)
-%%	(elapse $Years years)
-%%	($M modulo 12 into $Remaining)
 
 (elapse $W weeks)
 	($W times 7 into $Days)

@@ -145,9 +145,6 @@
 	($RemainingDays plus $CenturyDays into $TotalDays)
 	($TotalDays modulo 7 into $Weekday)
 
-(january $Year starts with $Weekday)
-	(calculate $Weekday for $Year from 1601 which started on 1)
-
 (leading zero $Num)
 	(if) ($Num < 10) (then)
 		0 (no space)

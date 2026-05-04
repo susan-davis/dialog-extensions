@@ -32,6 +32,9 @@ d6-lite:
 grid:
 	$(DEBUG) grid-tests.dg grid.dg utils.dg $(STDLIB)
 
+bearing:
+	$(DEBUG) bearing-tests.dg bearing.dg grid.dg utils.dg $(STDLIB)
+
 clean:
 	rm -f *~ \#*\# *.z5 *.z8 *.zblorb *.aastory *.d64 *.d71
 

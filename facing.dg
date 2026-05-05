@@ -4,6 +4,9 @@
 %% A lightweight alternative to bearing.dg for vintage hardware. Include either
 %% this or bearing.dg, but not both.
 
+%% Copyright © 2021-2026, Susan Davis. All rights reserved. See LICENSE for
+%% licensing details.
+
 %%-------------------------------- INTERFACES --------------------------------
 
 ($<GridObject facing $Facing)

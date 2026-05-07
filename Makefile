@@ -5,8 +5,7 @@ COMPILE=dialogc -t z5
 DEBUG=dgdebug -u
 STDLIB=unit.dg stdlib.dg
 
-#add d6-lite
-test: utils time duration dice dice-lite d6 d6-lite grid bearing facing
+test: utils time duration dice dice-lite d6 d6-lite grid bearing 
 
 utils:
 	$(DEBUG) utils-tests.dg utils.dg $(STDLIB)

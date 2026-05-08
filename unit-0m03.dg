@@ -1,0 +1,89 @@
+%% unit.dg
+(extension version)	Unit test runner 0m/03 by Susan Davis (line)
+
+%% This version is compatible with Dialog 0m/03 and 1a/01. If you're using
+%% 1b/01 or later, please use the version found in the Dialog distribution.
+
+%% See example(s) in test/unit in Dialog source distribution, or in the
+%% https://github.com/susan-davis/dialog-extensions repository.
+
+%% Copyright © 2021-2026, Susan Davis. All rights reserved. Licensed under the
+%% same license as the rest of Dialog; see license.txt or LICENSE for details.
+
+%%-------------------------------- INTERFACES --------------------------------
+
+%% (test #foo) expr will pass if expr is true and fail if expr is false.
+%% Include #foo in the global variable (list of tests [test1 test2 ...])
+
+(interface (test $<Testname))
+
+(interface (set up $<Testname)) %% special setup for the test
+
+(interface (clean up $<Testname)) %% restore to original state afterward
+
+(interface (assert $<Var = $<Val))
+
+(keep running on failure) %% negate to stop at first failed test
+
+%% We can't just (exhaust *(test $)), because that actually runs each test
+%% without setup, cleanup, or failure checks, so we work around that with
+%% a global variable, populated with all the tests. You can quarantine tests
+%% by commenting out their entry in the global variable declaration.
+
+(global variable (list of tests $))
+
+%%----------------------------- IMPLEMENTATION -----------------------------
+
+%% We almost don't need this, since that final line already does what we
+%% want, but adding binding checks can be useful.
+
+(assert $Thing1 = $Thing2) %% true if both are bound and ($Thing1 = $Thing2)
+	(fully bound $Thing1)
+	(bound $Thing2)
+	($Thing1 = $Thing2)
+
+(all tests pass)
+
+(program entry point)
+	(list of tests $Tests)
+	(length of $Tests into $Number)
+	(bold) Attempting $Number tests (roman) (line)
+	(stoppable) (exhaust) {
+		*($Test is one of $Tests)
+		Testing $Test:
+		(run-test $Test)
+	}
+	(if) (all tests pass) (then)
+		(bold) $Number tests passed successfully. (roman) (par)
+		(quit 0)
+	(else)
+		(bold) FAILED TEST. (roman) (par)
+		(quit 1)
+	(endif)
+
+(error $Code entry point)
+	(bold) FAILED TEST -- FATAL ERROR $Code. (roman) (par)
+	(now) ~(all tests pass)
+	(quit 2)
+
+(run-test $Test)
+	(if)
+		(stoppable) (set up $Test)   %% don't fail if absent
+		(test $Test)
+		(stoppable) (clean up $Test) %% don't fail if absent
+	(then)
+		Passed! (line)
+	(else)
+		(bold) Failed. (roman) (space) :-\( (line)
+		(now) ~(all tests pass)
+		(if) ~(keep running on failure) (then) (stop) (endif)
+	(endif)
+
+%% patch for ($ contains sublist $) issues that are fixed as of 1b/01
+($List contains sublist [$Head | $Tail])
+	*(split $List by [$Head] into $ and $Rest)
+	(append $Tail $ $Rest)
+
+%% implemented in 1b/01
+(interface (quit $<ExitStatus)) %% specify exit status
+(quit $)   (quit)

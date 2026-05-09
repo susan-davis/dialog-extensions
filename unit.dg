@@ -12,10 +12,10 @@
 
 (interface (test $Testname))
 
-%% (run test #foo) expr will pass if expr is true and fail if expr is false.
+%% (run #foo) expr will pass if expr is true and fail if expr is false.
 %% Include #foo in the global variable (list of tests [test1 test2 ...])
 
-(interface (run test $<Testname))
+(interface (run $<Testname))
 
 (interface (set up $<Testname)) %% special setup for the test
 
@@ -113,7 +113,7 @@
 	(reset body style) %% display output from the test itself in default colours
 	(if)
 		(stoppable) (exhaust) *(set up $Test)   %% don't fail if absent
-		(run test $Test)
+		(run $Test)
 		(stoppable) (exhaust) *(clean up $Test) %% don't fail if absent
 	(then)
 		(update body style)

@@ -12,25 +12,25 @@
 
 #d3
 (test *)
-(run test *)
+(run *)
 	(* 1000 times with max 3)
 
 #d6
 (test *)
-(run test *)
+(run *)
 	(* 1000 times with max 6)
 
 #d36
 (test *)
-(run test *)
+(run *)
 	(* 1000 times with max 36)
 
 #d216
 (test *)
-(run test *)
+(run *)
 	(* 1000 times with max 216)
 
 #d1296
 (test *)
-(run test *)
+(run *)
 	(* 1000 times with max 1296)

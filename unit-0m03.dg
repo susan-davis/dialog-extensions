@@ -12,10 +12,14 @@
 
 %%-------------------------------- INTERFACES --------------------------------
 
-%% (test #foo) expr will pass if expr is true and fail if expr is false.
+%% Give all your tests the (test *) trait.
+
+(interface (test $Testname))
+
+%% (run #foo) expr will pass if expr is true and fail if expr is false.
 %% Include #foo in the global variable (list of tests [test1 test2 ...])
 
-(interface (test $<Testname))
+(interface (run $<Testname))
 
 (interface (set up $<Testname)) %% special setup for the test
 
@@ -23,18 +27,17 @@
 
 (interface (assert $<Var = $<Val))
 
+(interface (assert $<Var > $<Val))
+
+(interface (assert $<Var < $<Val))
+
 (keep running on failure) %% negate to stop at first failed test
 
-%% We can't just (exhaust *(test $)), because that actually runs each test
-%% without setup, cleanup, or failure checks, so we work around that with
-%% a global variable, populated with all the tests. You can quarantine tests
-%% by commenting out their entry in the global variable declaration.
-
-(global variable (list of tests $))
+~(list failing tests) %% un-negate to summarize failing tests at the end
 
 %%----------------------------- IMPLEMENTATION -----------------------------
 
-%% We almost don't need this, since that final line already does what we
+%% We almost don't need these, since that final line already does what we
 %% want, but adding binding checks can be useful.
 
 (assert $Thing1 = $Thing2) %% true if both are bound and ($Thing1 = $Thing2)
@@ -42,42 +45,68 @@
 	(bound $Thing2)
 	($Thing1 = $Thing2)
 
-(all tests pass)
+(assert $Thing1 > $Thing2)
+	(fully bound $Thing1)
+	(bound $Thing2)
+	($Thing1 > $Thing2)
+
+(assert $Thing1 < $Thing2)
+	(fully bound $Thing1)
+	(bound $Thing2)
+	($Thing1 < $Thing2)
+
+(global variable (list of failures []))
 
 (program entry point)
-	(list of tests $Tests)
+	(collect $T) *(test $T) (into $Tests)
 	(length of $Tests into $Number)
-	(bold) Attempting $Number tests (roman) (line)
+	(bold) Attempting $Number test
+	(if) ~($Number = 1) (then) (no space) s (endif)
+	(no space) . (roman) (line)
 	(stoppable) (exhaust) {
-		*($Test is one of $Tests)
-		Testing $Test:
+		*(test $Test)
 		(run-test $Test)
 	}
-	(if) (all tests pass) (then)
-		(bold) $Number tests passed successfully. (roman) (par)
+	(list of failures $Failures)
+	(if) ($Failures = []) (then)
+		(bold) $Number test
+		(if) ~($Number = 1) (then) (no space) s (endif)
+		(bold)  passed successfully. (roman) (par)
 		(quit 0)
 	(else)
-		(bold) FAILED TEST. (roman) (par)
+		(length of $Failures into $Num)
+		(bold) $Num TEST
+		(if) ~($Num = 1) (then) (no space) S (endif)
+		FAILED
+		(if) (list failing tests) (then)
+			 (roman) $Failures (bold)
+		(endif)
+		(no space) . (roman) (par)
 		(quit 1)
+	(endif)
+
+($Test has failed)
+	(list of failures $List)
+	(append $List [$Test] $ListPlusTest)
+	(now) (list of failures $ListPlusTest)
+
+(run-test $Test)
+	Testing $Test :
+	(if)
+		(stoppable) (exhaust) *(set up $Test)   %% don't fail if absent
+		(run $Test)
+		(stoppable) (exhaust) *(clean up $Test) %% don't fail if absent
+	(then)
+	 	Passed! (line)
+	(else)
+		($Test has failed)
+		(bold) Failed. (roman) (space) :-\( (line)
+		(if) ~(keep running on failure) (then) (stop) (endif)
 	(endif)
 
 (error $Code entry point)
 	(bold) FAILED TEST -- FATAL ERROR $Code. (roman) (par)
-	(now) ~(all tests pass)
 	(quit 2)
-
-(run-test $Test)
-	(if)
-		(stoppable) (set up $Test)   %% don't fail if absent
-		(test $Test)
-		(stoppable) (clean up $Test) %% don't fail if absent
-	(then)
-		Passed! (line)
-	(else)
-		(bold) Failed. (roman) (space) :-\( (line)
-		(now) ~(all tests pass)
-		(if) ~(keep running on failure) (then) (stop) (endif)
-	(endif)
 
 %% patch for ($ contains sublist $) issues that are fixed as of 1b/01
 ($List contains sublist [$Head | $Tail])

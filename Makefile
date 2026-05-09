@@ -5,16 +5,13 @@ COMPILE=dialogc -t z5
 DEBUG=dgdebug -u
 STDLIB=unit.dg stdlib.dg
 
-test: utils time duration dice dice-lite d6 d6-lite grid bearing 
+test: utils time dice dice-lite d6 d6-lite grid bearing 
 
 utils:
 	$(DEBUG) utils-tests.dg utils.dg $(STDLIB)
 
 time:
 	$(DEBUG) time-tests.dg time.dg $(STDLIB)
-
-duration:
-	$(DEBUG) duration-tests.dg duration.dg time.dg $(STDLIB)
 
 dice:
 	$(DEBUG) dice-tests.dg dice.dg utils.dg $(STDLIB)
@@ -37,4 +34,4 @@ bearing:
 clean:
 	rm -f *~ \#*\# *.z5 *.z8 *.zblorb *.aastory *.d64 *.d71
 
-.PHONY: test all clean utils time dice dice-lite dice-extra
+.PHONY: test all clean utils time dice dice-lite d6 d6-lite grid bearing

@@ -6,7 +6,8 @@
 %% Copyright © 2021-2026, Susan Davis. All rights reserved. See LICENSE for
 %% licensing details.
 
-(grid supports every heading) %% do not change this flag
+%% TODO: add an additional file that ties this back to the stdlib.dg world
+%% model, perhaps with vehicles.
 
 %%-------------------------------- INTERFACES --------------------------------
 

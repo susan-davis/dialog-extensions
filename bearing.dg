@@ -34,7 +34,7 @@
 
 %% Turn, without moving the object
 
-(interface (turn $<Ship to bearing $<Bearing))
+(interface (turn $<Ship to heading $<Heading))
 
 (interface (turn $<Ship $<Degrees to starboard))
 

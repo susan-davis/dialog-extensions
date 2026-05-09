@@ -1,10 +1,5 @@
 %% dgdebug -u duration-tests.dg duration.dg time.dg unit.dg stdlib.dg
 
-(list of tests [
-	])
-
-%%----------------------------------------------------------------------------
-
 (current datetime [891 12 1969])
 
 (january starts on 3)
@@ -15,5 +10,3 @@
 				(now) (time is running)
 				(now) ~(suspend next tick)
 				(now) (time rate 1)
-
-%%----------------------------------------------------------------------------

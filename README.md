@@ -25,7 +25,7 @@ These extensions are written for Dialog 1a/01 and later, and aren't guaranteed t
 
 `unit.dg` -- Standard Dialog unit testing framework. Get this from the Dialog source distribution for the most up-to-date version.
 
-`unit-0m03.dg` -- Version compatible with Dialog 0m/03 and 1a/01.
+`unit-0m03.dg` -- Version of `unit.dg` compatible with Dialog 0m/03 and 1a/01.
 
 `stdlib.dg` -- Dialog standard library. Get this from the Dialog source distribution for the version that matches the compiler that you're using.
 

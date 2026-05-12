@@ -6,7 +6,7 @@
 %% implemented, this can be replaced, assuming that the PRNG passes
 %% spectral tests.
 
-(extension version)	Undo-safe six-sided die rolls v0.2 by Susan Davis (line)
+(extension version)	Undo-safe six-sided die rolls v0.3 by Susan Davis (line)
 
 %% Copyright © 2026, Susan Davis. All rights reserved. See LICENSE for
 %% licensing details.

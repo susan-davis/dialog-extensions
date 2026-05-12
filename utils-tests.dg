@@ -161,127 +161,127 @@
 
 #sort-4-2
 (test *)
-(run *)	(sort 4 2 into 2 4)
+(run *)		(sort 4 2 into 2 4)
 
 #sort-2-4
 (test *)
-(run *)	(sort 2 4 into 2 4)
+(run *)		(sort 2 4 into 2 4)
 
 #sort-0-0
 (test *)
-(run *)	(sort 0 0 into 0 0)
+(run *)		(sort 0 0 into 0 0)
 
 #sort-1-2-3
 (test *)
-(run *)	(sort 1 2 3 into 1 2 3)
+(run *)		(sort 1 2 3 into 1 2 3)
 
 #sort-1-3-2
 (test *)
-(run *)	(sort 1 3 2 into 1 2 3)
+(run *)		(sort 1 3 2 into 1 2 3)
 
 #sort-2-3-1
 (test *)
-(run *)	(sort 2 3 1 into 1 2 3)
+(run *)		(sort 2 3 1 into 1 2 3)
 
 #sort-2-1-3
 (test *)
-(run *)	(sort 2 1 3 into 1 2 3)
+(run *)		(sort 2 1 3 into 1 2 3)
 
 #sort-3-2-1
 (test *)
-(run *)	(sort 3 2 1 into 1 2 3)
+(run *)		(sort 3 2 1 into 1 2 3)
 
 #sort-3-1-2
 (test *)
-(run *)	(sort 3 1 2 into 1 2 3)
+(run *)		(sort 3 1 2 into 1 2 3)
 
 #10-plus-20
 (test *)
-(run *)	(add 10 to 20 into 30)
+(run *)		(add 10 to 20 into 30)
 
 #10-plus-20-max-25
 (test *)
-(run *)    (add 10 to 20 into 25 max 25)
+(run *)		(add 10 to 20 into 25 max 25)
 
 #10-plus-20-max-35
 (test *)
-(run *)    (add 10 to 20 into 30 max 35)
+(run *)		(add 10 to 20 into 30 max 35)
 
 #10-plus-20-max-0
 (test *)
-(run *)    (add 10 to 20 into 0 max 0)
+(run *)		(add 10 to 20 into 0 max 0)
 
 #0-plus-0-max-25
 (test *)
-(run *)    (add 0 to 0 into 0 max 25)
+(run *)		(add 0 to 0 into 0 max 25)
 
 #8000-plus-9000-max-10000
 (test *)
-(run *)    (add 8000 to 9000 into 10000 max 10000)
+(run *)		(add 8000 to 9000 into 10000 max 10000)
 
 #8192-plus-8191-max-16380
 (test *)
-(run *)    (add 8192 to 8191 into 16380 max 16380)
+(run *)		(add 8192 to 8191 into 16380 max 16380)
 
 #8192-plus-8192-max-16380
 (test *)
-(run *)    (add 8192 to 8192 into 16380 max 16380)
+(run *)		(add 8192 to 8192 into 16380 max 16380)
 
 #16383-plus-16383-max-16383
 (test *)
-(run *)	   (add 16383 to 16383 into 16383 max 16383)
+(run *)		(add 16383 to 16383 into 16383 max 16383)
 
 #16380-plus-3
 (test *)
-(run *)	   (add 3 to 16380 into 16383)
+(run *)		(add 3 to 16380 into 16383)
 
 #16380-plus-4
 (test *)
-(run *)	   (add 4 to 16380 into 16383)
+(run *)		(add 4 to 16380 into 16383)
 
 #30-minus-20
 (test *)
-(run *)    (subtract 20 from 30 into 10)
+(run *)		(subtract 20 from 30 into 10)
 
 #30-minus-40
 (test *)
-(run *)    (subtract 40 from 30 into 0)
+(run *)		(subtract 40 from 30 into 0)
 
 #split-number
 (test *)
-(run *)	(split 1789 into 1 7 8 9)
+(run *)		(split 1789 into 1 7 8 9)
 
 #split-smaller
 (test *)
-(run *)	(split 789 into 0 7 8 9)
+(run *)		(split 789 into 0 7 8 9)
 
 #split-smallest
 (test *)
-(run *)	(split 1 into 0 0 0 1)
+(run *)		(split 1 into 0 0 0 1)
 
 #take-last-n
 (test *)
-(run *)	(take last 3 from [1 2 3 4 5 6] into [4 5 6])
+(run *)		(take last 3 from [1 2 3 4 5 6] into [4 5 6])
 
 #take-last-zero
 (test *)
-(run *)	(take last 0 from [1 2 3 4 5 6] into [])
+(run *)		(take last 0 from [1 2 3 4 5 6] into [])
 
 #take-last-more-than-len
 (test *)
-(run *)	~(take last 7 from [1 2 3 5 6 7] into $)
+(run *)		~(take last 7 from [1 2 3 5 6 7] into $)
 
 #replace-element
 (test *)
-(run *)	(replace element 3 in [1 2 3 4 5] with 6 into [1 2 6 4 5])
+(run *)		(replace element 3 in [1 2 3 4 5] with 6 into [1 2 6 4 5])
 
 #replace-element-zero
 (test *)
-(run *)	~(replace element 0 in [1 2 3 4 5] with 6 into $)
+(run *)		~(replace element 0 in [1 2 3 4 5] with 6 into $)
 
 #replace-element-beyond-end
 (test *)
-(run *)	~(replace element 6 in [1 2 3 4 5] with 6 into $)
+(run *)		~(replace element 6 in [1 2 3 4 5] with 6 into $)
 
 #replace-element-with-max
 (test *)
@@ -397,13 +397,11 @@
 
 #12345-begins-with-12
 (test *)
-(run *)
-	([1 2 3 4 5] begins with sublist [1 2])
+(run *)		([1 2 3 4 5] begins with sublist [1 2])
 
 #12345-begins-with-12345
 (test *)
-(run *)
-	([1 2 3 4 5] begins with sublist [1 2 3 4 5])
+(run *)		([1 2 3 4 5] begins with sublist [1 2 3 4 5])
 
 #intentionally-fail-this-one-also
 %%(test *)
@@ -411,23 +409,19 @@
 
 #12345-doesnt-begin-with-22
 (test *)
-(run *)
-	~([1 2 3 4 5] begins with sublist [2 2])
+(run *)		~([1 2 3 4 5] begins with sublist [2 2])
 
 #12345-doesnt-begin-with-123456
 (test *)
-(run *)
-	~([1 2 3 4 5] begins with sublist [1 2 3 4 5 6])
+(run *)		~([1 2 3 4 5] begins with sublist [1 2 3 4 5 6])
 
 #12345-doesnt-begin-with-scalar
 (test *)
-(run *)
-	~([1 2 3 4 5] begins with sublist 1)
+(run *)		~([1 2 3 4 5] begins with sublist 1)
 
 #12345-doesnt-begin-with-nested
 (test *)
-(run *)
-	~([1 2 3 4 5] begins with sublist [[1] [2]])
+(run *)		~([1 2 3 4 5] begins with sublist [[1] [2]])
 
 #find-12
 (test *)
@@ -532,8 +526,7 @@
 (test *)
 (run *)
 	  (list of lists $List)
-	  (remove from $List beginning with sublist [1 2] into $NewList)
-	  (assert $NewList = [
+	  (remove from $List beginning with sublist [1 2] into [
 		[2 2 4 5 6]
 		[3 2 4 5 6]
 		[3 2 4 6 7]
@@ -544,8 +537,7 @@
 (run *)
 	  (list of lists $List)
 	  (remove from $List beginning with sublist [1 2] into $NewList)
-	  (remove from $NewList beginning with sublist [1 2] into $NewerList)
-	  (assert $NewerList = [
+	  (remove from $NewList beginning with sublist [1 2] into [
 		[2 2 4 5 6]
 		[3 2 4 5 6]
 		[3 2 4 6 7]
@@ -555,8 +547,7 @@
 (test *)
 (run *)
 	  (list of lists $List)
-	  (remove from $List beginning with sublist [2 2] into $NewList)
-	  (assert $NewList = [
+	  (remove from $List beginning with sublist [2 2] into [
 	  	[1 2 3 4 5]
 		[3 2 4 5 6]
 		[3 2 4 6 7]
@@ -566,8 +557,7 @@
 (test *)
 (run *)
 	  (list of lists $List)
-	  (remove from $List beginning with sublist [3 2] into $NewList)
-	  (assert $NewList = [
+	  (remove from $List beginning with sublist [3 2] into [
 	  	[1 2 3 4 5]
 		[2 2 4 5 6]
 		[3 2 4 6 7]
@@ -578,8 +568,7 @@
 (run *)
 	  (list of lists $List)
 	  (remove from $List beginning with sublist [3 2] into $NewList)
-	  (remove from $NewList beginning with sublist [3 2] into $NewerList)
-	  (assert $NewerList = [
+	  (remove from $NewList beginning with sublist [3 2] into [
 	  	[1 2 3 4 5]
 		[2 2 4 5 6]
 		[4 1 7 8 9]])
@@ -588,8 +577,7 @@
 (test *)
 (run *)
 	  (list of lists $List)
-	  (remove from $List beginning with sublist [4 1] into $NewList)
-	  (assert $NewList = [
+	  (remove from $List beginning with sublist [4 1] into [
 	  	[1 2 3 4 5]
 		[2 2 4 5 6]
 		[3 2 4 5 6]

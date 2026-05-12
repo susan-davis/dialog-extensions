@@ -31,78 +31,81 @@
     (3 is odd)
 	~(3 is even)
 
-#max-different
+#max-first-is-bigger
 (test *)
-(run *)
-	(max 2 3 3)
-	(max 3 2 3)
+(run *)		(max 3 2 3)
 
-#max-same
+#max-second-is-bigger
 (test *)
-(run *)
-	(max 2 2 2)
+(run *)		(max 2 3 3)
 
-#min-different
+#max-equal-values
 (test *)
-(run *)
-	(min 2 3 2)
-	(min 3 2 2)
+(run *)		(max 2 2 2)
 
-#min-same
+#min-first-is-bigger
 (test *)
-(run *)	(min 2 2 2)
+(run *)		(min 3 2 2)
+
+#min-second-is-bigger
+(test *)
+(run *)		(min 2 3 2)
+
+#min-equal-values
+(test *)
+(run *)		(min 2 2 2)
 
 #round-0-0
 (test *)
-(run *)	(round 0 to the nearest 5 into 0)
+(run *)		(round 0 to the nearest 5 into 0)
 
 #round-1-0
 (test *)
-(run *)	(round 1 to the nearest 5 into 0)
+(run *)		(round 1 to the nearest 5 into 0)
 
 #round-2-0
 (test *)
-(run *)	(round 2 to the nearest 5 into 0)
+(run *)		(round 2 to the nearest 5 into 0)
 
 #round-3-5
 (test *)
-(run *)	(round 3 to the nearest 5 into 5)
+(run *)		(round 3 to the nearest 5 into 5)
 
 #round-4-5
 (test *)
-(run *)	(round 4 to the nearest 5 into 5)
+(run *)		(round 4 to the nearest 5 into 5)
 
 #round-5-5
 (test *)
-(run *)	(round 5 to the nearest 5 into 5)
+(run *)		(round 5 to the nearest 5 into 5)
 
 #round-7-5
 (test *)
-(run *)	(round 7 to the nearest 5 into 5)
+(run *)		(round 7 to the nearest 5 into 5)
 
 #round-8-10
 (test *)
-(run *)	(round 8 to the nearest 5 into 10)
+(run *)		(round 8 to the nearest 5 into 10)
 
 #round-4-0
 (test *)
-(run *)	(round 4 to the nearest 10 into 0)
+(run *)		(round 4 to the nearest 10 into 0)
 
 #round-5-10
 (test *)
-(run *)	(round 5 to the nearest 10 into 10)
+(run *)		(round 5 to the nearest 10 into 10)
 
 #round-14-10
 (test *)
-(run *)	(round 14 to the nearest 10 into 10)
+(run *)		(round 14 to the nearest 10 into 10)
 
 #round-15-20
 (test *)
-(run *)	(round 15 to the nearest 10 into 20)
+(run *)		(round 15 to the nearest 10 into 20)
 
 #delta-4-2
 (test *)
-(run *)	(4 delta 2 into 2)
+(run *)		(4 delta 2 into 2)
 
 #delta-2-4
 (test *)
@@ -110,47 +113,47 @@
 
 #delta-2-2
 (test *)
-(run *)	(2 delta 2 into 0)
+(run *)		(2 delta 2 into 0)
 
 #delta-0-0
 (test *)
-(run *)	(0 delta 0 into 0)
+(run *)		(0 delta 0 into 0)
 
 #range-5-3
 (test *)
-(run *)	(5 is within 2 of 3)
+(run *)		(5 is within 2 of 3)
 
 #range-3-5
 (test *)
-(run *)	(3 is within 2 of 5)
+(run *)		(3 is within 2 of 5)
 
 #range-3-3
 (test *)
-(run *)	(3 is within 0 of 3)
+(run *)		(3 is within 0 of 3)
 
 #range-0-3
 (test *)
-(run *)	(0 is within 3 of 3)
+(run *)		(0 is within 3 of 3)
 
 #range-0-0
 (test *)
-(run *)	(0 is within 0 of 0)
+(run *)		(0 is within 0 of 0)
 
 #3-div-3-rounding-up
 (test *)
-(run *)	(3 divided by 3 into 1 rounding up)
+(run *)		(3 divided by 3 into 1 rounding up)
 
 #4-div-3-rounding-up
 (test *)
-(run *)	(4 divided by 3 into 2 rounding up)
+(run *)		(4 divided by 3 into 2 rounding up)
 
 #5-div-3-rounding-up
 (test *)
-(run *)	(5 divided by 3 into 2 rounding up)
+(run *)		(5 divided by 3 into 2 rounding up)
 
 #6-div-3-rounding-up
 (test *)
-(run *)	(6 divided by 3 into 2 rounding up)
+(run *)		(6 divided by 3 into 2 rounding up)
 
 #intentionally-fail-this-test
 %%(test *)
@@ -200,6 +203,22 @@
 (test *)
 (run *)    (add 10 to 20 into 25 max 25)
 
+#10-plus-20-max-35
+(test *)
+(run *)    (add 10 to 20 into 30 max 35)
+
+#10-plus-20-max-0
+(test *)
+(run *)    (add 10 to 20 into 0 max 0)
+
+#0-plus-0-max-25
+(test *)
+(run *)    (add 0 to 0 into 0 max 25)
+
+#8000-plus-9000-max-10000
+(test *)
+(run *)    (add 8000 to 9000 into 10000 max 10000)
+
 #8192-plus-8191-max-16380
 (test *)
 (run *)    (add 8192 to 8191 into 16380 max 16380)
@@ -208,13 +227,17 @@
 (test *)
 (run *)    (add 8192 to 8192 into 16380 max 16380)
 
+#16383-plus-16383-max-16383
+(test *)
+(run *)	   (add 16383 to 16383 into 16383 max 16383)
+
 #16380-plus-3
 (test *)
-(run *)	(add 3 to 16380 into 16383)
+(run *)	   (add 3 to 16380 into 16383)
 
 #16380-plus-4
 (test *)
-(run *)	(add 4 to 16380 into 16383)
+(run *)	   (add 4 to 16380 into 16383)
 
 #30-minus-20
 (test *)

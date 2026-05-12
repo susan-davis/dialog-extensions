@@ -16,7 +16,7 @@
 
 (interface (min $<X $<Y $>Min))
 
-(interface (sort $<X $<Y into $>Low $High))
+(interface (sort $<X $<Y into $>Low $>High))
 
 (interface (sort $<X $<Y $<Z into $>Low $>Mid $>High))
 

@@ -22,6 +22,7 @@ dice-lite:
 
 d6:
 	$(DEBUG) d6-tests.dg d6.dg utils.dg $(STDLIB)
+#	$(DEBUG) d6-lite-tests.dg d6.dg utils.dg $(STDLIB)
 
 d6-lite:
 	$(DEBUG) d6-lite-tests.dg d6-lite.dg utils.dg $(STDLIB)

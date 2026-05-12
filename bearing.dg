@@ -485,26 +485,51 @@
 %% along that slope from the origin, measure out a certain number of
 %% units along that line, and go square by square at the very end.
 
-(angle table $Table) ($Table =
-	[[ 1  0] [20  1] [18  1] [15  1] [11  1] %% 5
-	 [ 9  1] [ 8  1] [ 7  1] [ 6  1] [11  2] %% 10
-	 [16  3] [19  4] [ 9  2] [ 4  1] [19  5] %% 15
-	 [17  5] [10  3] [19  6] [20  7] [19  7] %% 20
-	 [18  7] [ 5  2] [19  8] [20  9] [19  9] %% 25
-	 [ 2  1] [ 2  1] [19 10] [20 11] [19 11] %% 30
-	 [ 5  3] [19 12] [20 13] [19 13] [10  7] %% 35
-	 [19 14] [ 4  3] [19 15] [ 5  4] [20 17] %% 40
-	 [17 15] [10  9] [20 19] [20 19] [ 1  1]])
-
-(slope for $Angle into $X $Y)
-	(if) ($Angle = 0) (then)
-		($X = 1)
-		($Y = 0)
-	(else)
-		(angle table $Table)
-		(nth $Table $Angle $Tuple)
-		([$X $Y] = $Tuple)
-	(endif)
+(slope for 0 into 1 0)
+(slope for 1 into 1 0)
+(slope for 2 into 20 1)
+(slope for 3 into 18 1)
+(slope for 4 into 15 1)
+(slope for 5 into 11 1)
+(slope for 6 into 9 1)
+(slope for 7 into 8 1)
+(slope for 8 into 7 1)
+(slope for 9 into 6 1)
+(slope for 10 into 11 2)
+(slope for 11 into 16 3)
+(slope for 12 into 19 4)
+(slope for 13 into 9 2)
+(slope for 14 into 4 1)
+(slope for 15 into 19 5)
+(slope for 16 into 17 5)
+(slope for 17 into 10 3)
+(slope for 18 into 19 6)
+(slope for 19 into 20 7)
+(slope for 20 into 19 7)
+(slope for 21 into 18 7)
+(slope for 22 into 5 2)
+(slope for 23 into 19 8)
+(slope for 24 into 20 9)
+(slope for 25 into 19 9)
+(slope for 26 into 2 1)
+(slope for 27 into 2 1)
+(slope for 28 into 19 10)
+(slope for 29 into 20 11)
+(slope for 30 into 19 11)
+(slope for 31 into 5 3)
+(slope for 32 into 19 12)
+(slope for 33 into 20 13)
+(slope for 34 into 19 13)
+(slope for 35 into 10 7)
+(slope for 36 into 19 14)
+(slope for 37 into 4 3)
+(slope for 39 into 5 4)
+(slope for 40 into 20 17)
+(slope for 41 into 17 15)
+(slope for 42 into 10 9)
+(slope for 43 into 20 19)
+(slope for 44 into 20 19)
+(slope for 45 into 1 1)
 
 %% Converting backwards from bearings to octants. We also use this for
 %% shield and firing arcs, so we'll bias the dividing points between

@@ -15,6 +15,7 @@ time:
 
 dice:
 	$(DEBUG) dice-tests.dg dice.dg utils.dg $(STDLIB)
+	$(DEBUG) dice-lite-tests.dg dice.dg utils.dg $(STDLIB)
 
 dice-lite:
 	$(DEBUG) dice-lite-tests.dg dice-lite.dg utils.dg $(STDLIB)

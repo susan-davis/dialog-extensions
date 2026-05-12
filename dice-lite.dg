@@ -1,6 +1,5 @@
 %% dice-lite.dg
-%% Memory-light version of dice.dg that leans on (random from $ to $ into $).
-%% Swap this in if you want to reduce output size and have been using dice.dg.
+%% Version of dice.dg that leans on (random from $ to $ into $).
 %% Do not include dice.dg if you include this file. Do include utils.dg.
 
 (extension version)	Simple die rolls v0.2 by Susan Davis (line)

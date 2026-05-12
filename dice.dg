@@ -605,11 +605,11 @@
 
 (roll $Die $Roll with advantage)
 	(roll two $Die $First $Second)
-	(max $First and $Second into $Roll)
+	(max $First $Second $Roll)
 
 (roll $Die $Roll with disadvantage)
 	(roll two $Die $First $Second)
-	(min $First and $Second into $Roll)
+	(min $First $Second $Roll)
 
 (roll $Die min mid max $Min $Mid $Max)
 	(roll three $Die $First $Second $Third)

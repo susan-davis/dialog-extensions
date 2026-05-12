@@ -34,23 +34,23 @@
 #max-different
 (test *)
 (run *)
-	(max 2 and 3 into 3)
-	(max 3 and 2 into 3)
+	(max 2 3 3)
+	(max 3 2 3)
 
 #max-same
 (test *)
 (run *)
-	(max 2 and 2 into 2)
+	(max 2 2 2)
 
 #min-different
 (test *)
 (run *)
-	(min 2 and 3 into 2)
-	(min 3 and 2 into 2)
+	(min 2 3 2)
+	(min 3 2 2)
 
 #min-same
 (test *)
-(run *)	(min 2 and 2 into 2)
+(run *)	(min 2 2 2)
 
 #round-0-0
 (test *)

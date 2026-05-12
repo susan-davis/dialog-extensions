@@ -14,9 +14,9 @@
 
 (interface (round $<Num to the nearest $<Increment into $>Result))
 
-(interface (max $<X and $<Y into $>Max))
+(interface (max $<X $<Y $>Max))
 
-(interface (min $<X and $<Y into $>Min))
+(interface (min $<X $<Y $>Min))
 
 (interface ($<Num1 delta $<Num2 into $>Result))
 
@@ -85,14 +85,14 @@
 	($Num > 0)
 	~($Num is odd)
 
-(max $X and $Y into $Result)
+(max $X $Y $Result)
 	(if) ($X > $Y) (then)
 		($Result = $X)
 	(else)
 		($Result = $Y)
 	(endif)
 
-(min $X and $Y into $Result)
+(min $X $Y $Result)
 	(if) ($X < $Y) (then)
 		($Result = $X)
 	(else)
@@ -186,7 +186,7 @@
 	(append $Front $Suffix $NewList)
 
 (replace element $N in $List with $New into $NewList with max $Max)
-	(min $New and $Max into $Value)
+	(min $New $Max $Value)
 	(replace element $N in $List with $Value into $NewList)
 
 (increase element $N in $List by $Num into $NewList)

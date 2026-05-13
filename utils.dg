@@ -16,7 +16,7 @@
 
 (interface (min $<X $<Y $>Min))
 
-(interface (sort $<X $<Y into $>Low $>High))
+(interface (sort $<X $<Y into $>Low $High))
 
 (interface (sort $<X $<Y $<Z into $>Low $>Mid $>High))
 
@@ -99,19 +99,19 @@
 		($Result = $Y)
 	(endif)
 
-(sort $X $Y into $Low $High)
+(sort $X $Y into $RX $RY)
 	(if) ($X > $Y) (then)
-		($Low  = $Y)
-		($High = $X)
+		($RX = $Y)
+		($RY = $X)
 	(else)
-		($Low  = $X)
-		($High = $Y)
+		($RX = $X)
+		($RY = $Y)
 	(endif)
 
-(sort $X $Y $Z into $Low $Middle $High)
+(sort $X $Y $Z into $RX $RY $RZ)
     (sort $X $Y into $L1 $H1)
-	(sort $H1 $Z into $L2 $High)
-	(sort $L1 $L2 into $Low $Middle)
+	(sort $H1 $Z into $L2 $RZ)
+	(sort $L1 $L2 into $RX $RY)
 
 ($X delta $Y into $Result)
 	(sort $X $Y into $Low $High)
@@ -231,6 +231,22 @@
 		($Match = $Head)
 	(else)
 	    (find in $Tail beginning with sublist $Sublist into $Match)
+	(endif)
+
+(find in [] with highest element $ into [])
+
+(find in $List with highest element $Num into $Match)
+	($List = [$Head | $Tail])
+	(nth $Head $Num $First)
+	(find in $Tail with highest element $Num into $HighTail)
+	(if) (nth $HighTail $Num $Second) (then)
+		(if) ($First < $Second) (then)
+			($Match = $HighTail)
+		(else)
+			($Match = $Head)
+		(endif)
+	(else)
+		($Match = $Head)
 	(endif)
 
 (remove from [] beginning with sublist $ into [])

@@ -7,21 +7,19 @@ These extensions are written for Dialog 1a/01 and later, and aren't guaranteed t
 
 `time.dg` -- Useful utilities for handling the date and time of day.
 
-`dice.dg` -- `UNDO`-safe random number generator, based around fair rolls with good randomness stored in a table. Uses an extra 446 bytes, plus code size.
-
-`dice-lite.dg` -- Smaller footprint version of `dice.dg` for vintage hardware.
-
-`d6.dg` -- Simplified version of `dice.dg` for games that only need six-sided dice. Uses an extra 446 bytes, plus code size.
-
-`d6-lite.dg` -- Smaller footprint version of `d6.dg` for vintage hardware.
-
 `utils.dg` -- Grab bag of useful methods for arithmetic and list handling.
+
+`dice.dg` -- `UNDO`-safe random number generator, based around fair rolls with good randomness stored in a table. 
+
+`dice-lite.dg` -- Version of `dice.dg` that just leans on the built-in `(random from $ to $ into $)` predicate.
+
+`d6.dg` -- Simplified version of `dice.dg` for games that only need six-sided dice.
+
+`d6-lite.dg` -- Version of `d6.dg` that just leans on the built-in `(random from $ to $ into $)` predicate.
 
 `grid.dg` -- Implement grid movement in a large open space.
 
 `bearing.dg` -- Implement 360 degree headings and bearings, and calculate movement to any compass heading.
-
-`facing.dg` -- Light-weight version of bearing.dg for vintage hardware, based around eight directions.
 
 `unit.dg` -- Standard Dialog unit testing framework. Get this from the Dialog source distribution for the most up-to-date version.
 

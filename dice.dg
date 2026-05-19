@@ -48,6 +48,9 @@
 
 (interface (roll $<Num $<Dice minus $<Penalty $>Total))
 
+%% Our version of (random from 1 to $ into $), without blocking that predicate,
+%% so that we can randomize the list position in (shuffle randomness).
+
 (interface (percentage of $<Number into $>Result))
 
 %% d6xd6-style rolls, including bonuses and penalties

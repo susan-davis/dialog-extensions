@@ -40,17 +40,17 @@
 #max-coords
 (test *)
 (run *)
-	(maximum coordinate value 1260)
+	(maximum coordinate value 1270)
 
 #max-coords-on-map
 (test *)
 (run *)
-	(position [1260 1260] is on the map)
+	(position [1270 1270] is on the map)
 
 #max-coords-plus-one-not-on-map
 (test *)
 (run *)
-	(position [1261 1261] is off the map)
+	(position [1271 1271] is off the map)
 
 #maxint-not-on-map
 (test *)

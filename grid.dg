@@ -135,6 +135,7 @@
 	(endif)
 	([$X $Y | $] = $Place)
 	([$X $Y | $Tail] = $NewPosition)
+	(fully bound $NewPosition)
 	(now) ($Object position $NewPosition)
 
 (remove $Object from the map)
@@ -276,6 +277,7 @@
 	($Moves minus 1 into $Jumps)
 	(if) ~($Moves > $Num) ($Object can jump $Jumps obstacles) (then)
 	    ($Moves squares $Direction from $Here into $There)
+		(fully bound $There)
 		(now) ($Object position $There)
 		($Num minus $Moves into $Remaining)
 		($Object moves $Remaining squares $Direction)

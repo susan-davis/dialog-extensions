@@ -628,6 +628,7 @@
 	($Result = $R)
 
 (square at $Distance from $Origin to $Destination into $Result)
+    (fully bound $Origin) (fully bound $Destination)
 	(calculate range from $Origin to $Destination into $Range)
 	(if) ($Distance < $Range) (then)
 		(square $Distance $Origin $Destination into $Result)
@@ -637,6 +638,7 @@
 
 (square at $Distance on bearing $Bearing from $Place into $Result)
 	(offset 1 on bearing $Bearing from $Place into $Offset)
+	(fully bound $Offset)
 	(calculate range from $Place to $Offset into $Increment)
 	($Distance divided by $Increment into $Multiple)
 	($Distance modulo $Increment into $Remainder)
@@ -740,6 +742,7 @@
 	($Ship is on the map)
 	($Ship position $Origin)
 	(square at $Distance on bearing $Heading from $Origin into $Desired)
+	(fully bound $Desired)
 	(drag $Ship to position $Desired)
 
 (drag $Ship $Distance toward $Target)

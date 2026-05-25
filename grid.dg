@@ -276,7 +276,8 @@
 (closest unoccupied square to $Place from $Origin into $Result)
     (fully bound $Place) (fully bound $Origin)
     (if) (another object can move to $Place) (then)
-	    ($Result = $Place)
+	    ([$X $Y | $] = $Place)
+	    ([$X $Y]     = $Result)
 	(else)
 	    (direction from $Place to $Origin into $Direction)
 		(next square $Direction from $Place into $New)
@@ -487,8 +488,8 @@
 	([$ $ | $Tail] = $Here)
     (closest unoccupied square to $There from $Here into $Square)
 	([$X $Y | $]     = $Square)
-	([$X $Y | $Tail] = $There)
-	(now) ($Object position $There)
+	([$X $Y | $Tail] = $New)
+	(now) ($Object position $New)
 
 ($ moves 0 squares $) %% do nothing
 

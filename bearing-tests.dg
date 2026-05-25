@@ -37,6 +37,10 @@
 		(now) ($Object position $NewPosition)
 	}
 
+(inverted map)
+	(now) (x increases west)
+    (now) ~(y increases south)
+
 (reset map)
 	(now) ~(x increases west)
 	(now) (y increases south)
@@ -602,94 +606,6 @@
 (run *)
 	(turn #test-ship to heading 45)
 	(#test-ship heading 45)
-
-#closest-unoccupied-square-empty
-(test *)
-(run *)
-	(closest unoccupied square to [879 1044] from [344 454] into [879 1044])
-
-#closest-unoccupied-square-empty-big
-(test *)
-(run *)
-    (big numbers)
-	(closest unoccupied square to [8794 10444] from [3444 4544]
-	         into [8794 10444])
-
-#closest-unoccupied-square-north
-(test *)
-(run *)
-	(closest unoccupied square to [344 454] from [344 444] into [344 453])
-
-#closest-unoccupied-square-north-big
-(test *)
-(run *)
-    (big numbers)
-	(closest unoccupied square to [3444 4544] from [3444 4444] into [3444 4534])
-
-#closest-unoccupied-square-south
-(test *)
-(run *)
-	(closest unoccupied square to [344 454] from [344 466] into [344 455])
-
-#closest-unoccupied-square-south-big
-(test *)
-(run *)
-    (big numbers)
-	(closest unoccupied square to [3444 4544] from [3444 4664] into [3444 4554])
-
-#closest-unoccupied-square-east
-(test *)
-(run *)
-	(closest unoccupied square to [344 454] from [355 454] into [345 454])
-
-#closest-unoccupied-square-west
-(test *)
-(run *)
-	(closest unoccupied square to [344 454] from [333 454] into [343 454])
-
-#closest-unoccupied-square-north-inverted
-(test *)
-(run *)
-	(now) (x increases west)
-	(now) ~(y increases south)
-	(closest unoccupied square to [344 454] from [344 466] into [344 455])
-
-#closest-unoccupied-square-south-inverted
-(test *)
-(run *)
-	(now) (x increases west)
-	(now) ~(y increases south)
-	(closest unoccupied square to [344 454] from [344 444] into [344 453])
-
-#closest-unoccupied-square-east-inverted
-(test *)
-(run *)
-	(now) (x increases west)
-	(now) ~(y increases south)
-	(closest unoccupied square to [344 454] from [333 454] into [343 454])
-
-#closest-unoccupied-square-west-inverted
-(test *)
-(run *)
-	(now) (x increases west)
-	(now) ~(y increases south)
-	(closest unoccupied square to [344 454] from [355 454] into [345 454])
-
-#closest-unoccupied-square-near-target
-(test *)
-(run *)
-	(#test-ship position $Here)
-	(#near-target position $There)
-	(closest unoccupied square to $There from $Here into $Unoccupied)
-	(assert $Unoccupied = [315 425 0])
-
-#closest-unoccupied-square-far-target
-(test *)
-(run *)
-	(#test-ship position $Here)
-	(#far-target position $There)
-	(closest unoccupied square to $There from $Here into $Unoccupied)
-	(assert $Unoccupied = [423 315 0])
 
 #angle-octant-1
 (test *)

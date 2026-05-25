@@ -13,6 +13,8 @@
 
 (interface ($<GridObject heading $>Heading))
 
+(interface ($<GridObject direction $>Direction))
+
 %% We don't have tangent or arctangent available, so we'll have to use a
 %% lookup table, and extrapolate for bearings involving distances larger
 %% than one sector. There's supposed to be some random sloppiness in
@@ -90,18 +92,9 @@
 	($Object position $Position)
 	(nth $Position 3 $Heading)
 
-%% ------------------------- SQUARES AND COLLISIONS -------------------------
-
-(closest unoccupied square to $Place from $Origin into $Result)
-	(fully bound $Place) (fully bound $Origin)
-	(if) ~(object at $Place into $) (or) ($Place = $Origin) (then)
-		($Result = $Place)
-	(else)
-		(calculate bearing from $Place to $Origin into $Bearing)
-		(direction for $Bearing into $Direction)
-		(next square $Direction from $Place into $New)
-		(closest unoccupied square to $New from $Origin into $Result)
-	(endif)
+($Object direction $Direction)
+    ($Object heading $Heading)
+	(direction for $Heading into $Direction)
 
 %% ------------------------------ BEARINGS ------------------------------
 
@@ -371,11 +364,6 @@
 		($Y = $DY)
 	(endif)
 
-%% Dividing into eight octants allows us to make small tables that only
-%% cover a 45 degree sector.
-
-%% Convert from the table into the final compass bearing.
-
 (bearing for $Ang in octant $Octant into $Bearing)
 	(number $Ang) ($Ang modulo 360 into $Angle)
 	(if)     ($Octant = 1) (then)
@@ -397,8 +385,6 @@
 	(else)
 		($Bearing = 0)
 	(endif)
-
-%% And all that adds up to this, which does the final calculation:
 
 (calculate bearing from $Here to $There into $Result)
 	(octant from $Here to $There into $Octant)
@@ -691,17 +677,7 @@
 
 (drag $Ship to position $Desired)
 	($Ship is on the map)
-	($Ship position $Origin)
-	([$ $ | $Tail]   = $Origin)
-	(stacking limit $Stacking)
-	(if) ($Stacking = 1) (then)
-		(closest unoccupied square to $Desired from $Origin into $Square)
-	(else)
-		($Desired = $Square)
-	(endif)
-	([$X $Y | $]     = $Square)
-	([$X $Y | $Tail] = $NewPosition)
-	(place $Ship at $NewPosition)
+	($Ship moves to square $Desired)
 
 (drag $Ship $Distance on heading $Heading)
 	($Ship is on the map)

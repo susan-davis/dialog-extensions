@@ -2,7 +2,7 @@
 %% Version of d6.dg that leans on (random from $ to $ into $).
 %% Do not include d6.dg if you include this file. Do include utils.dg.
 
-(extension version)	Simple six-sided die rolls v0.2 by Susan Davis (line)
+(extension version)	Simple six-sided die rolls v0.2 by Susan Davis.
 
 %% Copyright © 2026, Susan Davis. All rights reserved. See LICENSE for
 %% licensing details.

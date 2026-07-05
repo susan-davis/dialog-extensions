@@ -1,14 +1,11 @@
 %% grid.dg
 %% Include utils.dg when compiling or debugging.
 
-(extension version)	Grid movement v0.3, by Susan Davis (line)
+(extension version)	Grid movement v0.3, by Susan Davis.
 
 %% Implements free movement on a cartesian grid. The grid is divided into
 %% 10-unit squares, with diagonal squares 14 units from each other, and only
 %% one object occupying a given square.
-
-%% TODO: add an additional file that ties this back to the stdlib.dg world
-%% model, with exits and points of interest at certain coordinates or ranges.
 
 %% Copyright © 2021-2026, Susan Davis. All rights reserved. See LICENSE for
 %% licensing details.
@@ -35,6 +32,15 @@
 
 %%-------------------------------- INTERFACES --------------------------------
 
+%% Grids are large open spaces where movement and visibility are relatively
+%% free, and where it's easier to model movement, visibility, and related
+%% topics with a grid than with a stdlib-style directed graph. Multiple
+%% grids can be supported, to allow for land, sea, air, space, and so forth.
+%% For simplicity, all grids in the same game will share the same maximum
+%% dimensions.
+
+(interface (grid $))
+
 %% Grid objects all bind a per-object variable ($ state $), which returns a
 %% tuple of at least two elements, specifying the object's X-Y position. Other
 %% modules may add more elements to the tuple.
@@ -49,15 +55,21 @@
 
 %% Positions and coordinates
 
-(interface (place $<Object at $<Position)) %% teleport to another square
+(interface (place $<Object at $<Position in $<Grid)) 
 
-(interface ($<GridObject is on the map))
+(interface (place $<Object at $<Position)) %% in its current grid
 
-(interface (position $<Position is on the map))
+(interface ($<GridObject is in $<Grid))
 
-(interface (position $<Position is off the map))
+(interface ($<GridObject is on the map)) 
 
-(interface (remove $<GridObject from the map))
+(interface (position $<Position is on the map))  %% not at [16383 16383]
+
+(interface (position $<Position is off the map)) %% at [16383 16383]
+
+(interface (remove $<GridObject from $<Grid))
+
+(interface (remove $<GridObject from the map)) %% but remember which grid
 
 (interface (position $<Here equals position $<There))
 

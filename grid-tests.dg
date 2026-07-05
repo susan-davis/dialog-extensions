@@ -1,5 +1,8 @@
 %% dgdebug -u grid-tests.dg grid.dg utils.dg unit.dg stdlib.dg
 
+#space
+(grid *)
+
 #test-ship
 (grid object *)
 (* initial position [344 454 315])

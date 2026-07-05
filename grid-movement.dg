@@ -1,0 +1,24 @@
+%% grid-movement.dg
+%% include grid.dg and utils.dg when compiling or debugging
+
+(extension version) Grid movement v0.1 by Susan Davis.
+
+%% Copyright © 2026, Susan Davis. All rights reserved. See LICENSE for
+%% licensing details.
+
+%%----------------------------------------------------------------------------
+
+
+
+%%-------------------------------- INTERFACES --------------------------------
+
+(interface (from $<X $<Y in $<Grid go $<Direction to $<Room))
+
+(interface (from $<X $<Y go $<Direction to $<Room)
+
+(interface (from $<Room go $<Direction to $<X $<Y in $<Grid)) 
+
+(interface (from $<Room go $<Direction to $<X $<Y))
+
+%%------------------------------ IMPLEMENTATION ------------------------------
+

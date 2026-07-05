@@ -1,0 +1,3 @@
+%% dgdebug -u grid-movement-tests.dg grid-movement.dg grid.dg utils.dg \
+%%         unit.dg stdlib.dg
+

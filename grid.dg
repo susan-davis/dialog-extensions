@@ -55,13 +55,13 @@
 
 %% Positions and coordinates
 
-(interface (place $<Object at $<Position in $<Grid)) 
+(interface (place $<Object at $<Position in $<Grid))
 
 (interface (place $<Object at $<Position)) %% in its current grid
 
 (interface ($<GridObject is in $<Grid))
 
-(interface ($<GridObject is on the map)) 
+(interface ($<GridObject is on the map))
 
 (interface (position $<Position is on the map))  %% not at [16383 16383]
 
@@ -171,8 +171,17 @@
 	(fully bound $NewPosition)
 	(now) ($Object position $NewPosition)
 
+(place $Object at $Place in $Grid)
+    (place $Object at $Place)
+	(now) ($Object is #in $Grid)
+
 (remove $Object from the map)
 	(place $Object at [16383 16383])
+
+(remove $Object from $Grid)
+	($Object is #in $Grid)
+	(remove $Object from the map)
+	(now) ($Object is nowhere)
 
 (position $Here equals position $There) %% round off units
 	([$X1 $Y1 | $] = $Here)

@@ -3,6 +3,9 @@
 #space
 (grid *)
 
+#other-grid
+(grid *)
+
 #test-ship
 (grid object *)
 (* initial position [344 454 315])
@@ -57,6 +60,7 @@
         *(grid object $Object)
         ($Object initial position $Position)
 		(now) ($Object position $Position)
+		(now) ($Object is #in #space)
 	}
 
 %%-----------------------------------------------------------------------------
@@ -73,6 +77,14 @@
 	(place #test-ship at [500 500])
 	(#test-ship x 500)
 	(#test-ship y 500)
+
+#place-in-space
+(test *)
+(run *)
+	(place #test-ship at [345 678] in #space)
+	(#test-ship x 345)
+	(#test-ship y 678)
+	(#test-ship is #in #space)
 
 #max-coords
 (test *)
@@ -114,6 +126,22 @@
 (run *)
 	(remove #closest-target from the map)
     ~(#closest-target is on the map)
+	(#closest-target is #in #space)
+
+#remove-from-space
+(test *)
+(run *)
+	(remove #closest-target from #space)
+    ~(#closest-target is on the map)
+	(#closest-target is nowhere)
+	~(#closest-target is #in #space)
+
+#dont-remove-from-wrong-grid
+(test *)
+(run *)
+	 ~(remove #closest-target from #other-grid)
+	 (#closest-target is on the map)
+	 (#closest-target is #in #space)
 
 #restore-removed-target
 (test *)
@@ -122,12 +150,14 @@
 	(place #closest-target at [334 454])
 	(#closest-target x 334)
 	(#closest-target y 454)
+	(#closest-target is #in #space)
 
 #position-for-removed-target
 (test *)
 (run *)
 	(remove #closest-target from the map)
 	(#closest-target position [16383 16383 0])
+	(#closest-target is #in #space)
 
 #max-coords-on-map-big
 (test *)

@@ -1,3 +1,32 @@
 %% dgdebug -u grid-movement-tests.dg grid-movement.dg grid.dg utils.dg \
 %%         unit.dg stdlib.dg
 
+~(y increases south)
+(x increases west)
+
+#prairie
+(grid *)
+(descr *) Gently rolling hills covered with prairie grass stretch out in all
+	   	  directions.
+
+#lecompton
+(room *)
+(from * go #south to 80 10 in #prairie)
+(from * go $ to #south)
+
+#prairie-city
+(room *)
+(from * go #north to 60 80 in #prairie)
+(from * go $ to #north)
+
+#calhoun
+(room *)
+(from * go #north to 40 70 in #prairie)
+(from * go $ to #north)
+
+#black-jack
+(room *)
+(from * go #north to 20 80 in #prairie)
+(from * go $ to #north)
+
+(set up $)

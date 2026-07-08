@@ -14,11 +14,6 @@
 
 (interface (from $<X $<Y in $<Grid go $<Direction to $<Room))
 
-(interface (from $<X $<Y go $<Direction to $<Room)
-
-(interface (from $<Room go $<Direction to $<X $<Y in $<Grid)) 
-
-(interface (from $<Room go $<Direction to $<X $<Y))
+(interface (from $<Room go $<Direction to $<X $<Y in $<Grid))
 
 %%------------------------------ IMPLEMENTATION ------------------------------
-

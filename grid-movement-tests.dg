@@ -29,4 +29,7 @@
 (from * go #north to 20 80 in #prairie)
 (from * go $ to #north)
 
+#player
+(* is #in #lecompton)
+
 (set up $)

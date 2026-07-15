@@ -104,6 +104,8 @@
 
 (interface (target $<Target is $>Direction of $<Object))
 
+(interface (next square $<Relation from $<Place into $>Result))
+
 %% Moving on the grid
 
 (interface ($<Object moves $<Num squares $<Direction)) %% raw squares

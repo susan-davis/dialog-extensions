@@ -8,12 +8,16 @@
 (grid *)
 (descr *) Gently rolling hills covered with prairie grass stretch out in all
 	   	  directions.
+(from 81 11 in * go #northeast to #lecompton)
+(from 80 11 in * go #north to #lecompton)
+(from 79 11 in * go #northwest to #lecompton)
+
 
 #lecompton
 (room *)
 (from * go #southeast to 79 11 in #prairie)
 (from * go #south to 80 11 in #prairie)
-(from 81 11 in #prairie go #northeast to #lecompton)
+(from * go #southwest to 81 11 in #prairie)
 
 #prairie-city
 (room *)
@@ -40,4 +44,4 @@
 (run *)
 	 (stoppable) (perform [go #south])
 	 (#player is #in #prairie)
-	 (#player position [80 10])
+	 (#player position [80 11])

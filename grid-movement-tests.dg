@@ -11,25 +11,33 @@
 
 #lecompton
 (room *)
-(from * go #south to 80 10 in #prairie)
-(from * go $ to #south)
+(from * go #southeast to 79 11 in #prairie)
+(from * go #south to 80 11 in #prairie)
+(from 81 11 in #prairie go #northeast to #lecompton)
 
 #prairie-city
 (room *)
-(from * go #north to 60 80 in #prairie)
-(from * go $ to #north)
+(* is at 60 80 in #prairie)
 
 #calhoun
 (room *)
-(from * go #north to 40 70 in #prairie)
-(from * go $ to #north)
+(* is at 40 70 in #prairie)
 
 #black-jack
 (room *)
-(from * go #north to 20 80 in #prairie)
-(from * go $ to #north)
+(* is at 20 80 in #prairie)
 
 #player
 (* is #in #lecompton)
 
 (set up $)
+    (now) (#player is #in #lecompton)
+
+%%-----------------------------------------------------------------------------
+
+#lecompton-to-grid
+(test *)
+(run *)
+	 (stoppable) (perform [go #south])
+	 (#player is #in #prairie)
+	 (#player position [80 10])

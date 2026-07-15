@@ -8,12 +8,16 @@
 
 %%----------------------------------------------------------------------------
 
+(global variable (squares per minute 1))
 
+(global variable (minutes per square 1))
 
 %%-------------------------------- INTERFACES --------------------------------
 
 (interface (from $<X $<Y in $<Grid go $<Direction to $<Room))
 
 (interface (from $<Room go $<Direction to $<X $<Y in $<Grid))
+
+(interface ($<Room is at $<X $<Y in $<Grid))
 
 %%------------------------------ IMPLEMENTATION ------------------------------

@@ -18,6 +18,45 @@
 
 (interface (from $<Room go $<Direction to $<X $<Y in $<Grid))
 
+(interface ($<Room connects $<Direction to $<X $<Y in $<Grid))
+
 (interface ($<Room is at $<X $<Y in $<Grid))
 
+(interface (entrance to $<Room is at $<X $<Y in $<Grid))
+
+(interface ($<Room is above $<X $<Y in $<Grid))
+
+(interface ($<Room is below $<X $<Y in $<Grid))
+
 %%------------------------------ IMPLEMENTATION ------------------------------
+
+@($Room connects $Direction to $X $Y in $Grid)
+	*(from $Room go $Direction to $X $Y in $Grid)
+	(opposite of $Direction is $Opposite)
+	*(from $X $Y in $Grid go $Opposite to $Room)
+
+@($Room is at $X $Y in $Grid)
+	(1 north from $Y into $NY)
+	(1 south from $Y into $SY)
+	(1 east from $X into $EX)
+	(1 west from $X into $WX)
+	*($Room connects #north to $X $NY in $Grid)
+	*($Room connects #northeast to $EX $NY in $Grid)
+	*($Room connects #east to $EX $Y in $Grid)
+	*($Room connects #southeast to $EX $SY in $Grid)
+	*($Room connects #south to $X $SY in $Grid)
+	*($Room connects #southwest to $WX $SY in $Grid)
+	*($Room connects #west to $WX $Y in $Grid)
+	*($Room connects #northwest to $WX $NY in $Grid)
+
+@(entrance to $Room is at $X $Y in $Grid)
+	*(from $Room go #out to $X $Y in $Grid)
+	*(from $X $Y in $Grid go #in to $Room)
+
+@($Room is above $X $Y in $Grid)
+	*(from $X $Y in $Grid go #up to $Room)
+	*(from $Room go #down to $X $Y in $Grid)
+
+@($Room is below $X $Y in $Grid)
+	*(from $X $Y in $Grid go #down to $Room)
+	*(from $Room go #up to $X $Y in $Grid)

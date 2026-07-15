@@ -15,9 +15,9 @@
 
 #lecompton
 (room *)
-(from * go #southeast to 79 11 in #prairie)
-(from * go #south to 80 11 in #prairie)
-(from * go #southwest to 81 11 in #prairie)
+(from * go #southeast to 79 9 in #prairie)
+(from * go #south to 80 9 in #prairie)
+(from * go #southwest to 81 9 in #prairie)
 
 #prairie-city
 (room *)
@@ -39,8 +39,20 @@
 
 %%-----------------------------------------------------------------------------
 
-#lecompton-to-grid
+#north-of-calhoun-is-not-80-10
 (test *)
+%%(run *)
+	 ~(from #calhoun go #north to 80 10 in #prairie)
+	 ~(from 80 10 in #prairie go #south to #calhoun)
+
+#north-of-calhoun-is-40-71
+(test *)
+(run *)
+	 (from #calhoun go #north to 40 71 in #prairie)
+	 (from 40 71 in #prairie go #south to #calhoun)
+
+#lecompton-to-grid
+%%(test *)
 (run *)
 	 (stoppable) (perform [go #south])
 	 (#player is #in #prairie)

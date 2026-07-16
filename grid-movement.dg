@@ -28,7 +28,21 @@
 
 (interface ($<Room is below $<X $<Y in $<Grid))
 
+(interface (move player to $<X $<Y in $<Grid))
+
+(interface (enter $<X $<Y in $<Grid))
+
 %%------------------------------ IMPLEMENTATION ------------------------------
+
+(move player to $X $Y in $Grid)
+	(current player $Player)
+	(grid object $Player)
+	(place $Player at $X $Y in $Grid)
+	(move player to #in $Grid)
+
+(enter $X $Y in $Grid)
+	(move player to $X $Y in $Grid)
+	(narrate entering $X $Y in $Grid)
 
 @($Room connects $Direction to $X $Y in $Grid)
 	*(from $Room go $Direction to $X $Y in $Grid)

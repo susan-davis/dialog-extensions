@@ -12,26 +12,31 @@
 (from 80 11 in * go #north to #lecompton)
 (from 79 11 in * go #northwest to #lecompton)
 
-
 #lecompton
 (room *)
+(descr *) You're in Lecompton.
 (from * go #southeast to 79 9 in #prairie)
 (from * go #south to 80 9 in #prairie)
 (from * go #southwest to 81 9 in #prairie)
 
 #prairie-city
 (room *)
+(descr *) You're in Prairie City.
 (* is at 60 80 in #prairie)
 
 #calhoun
 (room *)
+(descr *) You're in Calhoun.
 (* is at 40 70 in #prairie)
 
 #black-jack
 (room *)
+(descr *) You're in Black Jack.
 (* is at 20 80 in #prairie)
 
 #player
+(current player *)
+(grid object *)
 (* is #in #lecompton)
 
 (set up $)
@@ -46,13 +51,13 @@
 	 ~(from 80 10 in #prairie go #south to #calhoun)
 
 #north-of-calhoun-is-40-71
-(test *)
+%%(test *)
 (run *)
 	 (from #calhoun go #north to 40 71 in #prairie)
 	 (from 40 71 in #prairie go #south to #calhoun)
 
 #lecompton-to-grid
-%%(test *)
+(test *)
 (run *)
 	 (stoppable) (perform [go #south])
 	 (#player is #in #prairie)

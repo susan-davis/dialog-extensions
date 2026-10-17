@@ -44,9 +44,9 @@
 
 %%-----------------------------------------------------------------------------
 
-#lecompton-to-grid
+#move-player-to-42-70
 (test *)
 (run *)
-	 (stoppable) (perform [go #south])
+	 (stoppable) (move player to 42 70 in #prairie)
 	 (#player is #in #prairie)
-	 (#player position [80 11])
+	 (#player position [42 70])
